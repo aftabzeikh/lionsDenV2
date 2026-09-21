@@ -8,7 +8,7 @@ export const THEMES = {
 export const themeTokens = {
   [THEMES.NORMAL]: {
     colors: {
-      primary: '#eab308', // Gaming gold
+      primary: '#FFC800', // Gaming gold
       secondary: '#475569',
       accent: '#8b5cf6',
       background: '#020617',

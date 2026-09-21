@@ -30,7 +30,7 @@ export const HeroSection = () => {
             </span>
 
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black italic tracking-tighter uppercase text-[#F8C45E] drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)] leading-[0.92] -ml-0.5 tracking-widest">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black italic tracking-tighter uppercase text-primary drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)] leading-[0.92] -ml-0.5 tracking-widest">
               ENTER THE DEN
             </h1>
 

@@ -31,7 +31,7 @@ const CATEGORIES = [
   { id: 'fishing', name: 'Fishing', filterKey: 'fishing' },
   { id: 'live_table', name: 'Live Table', filterKey: 'live_table' },
   { id: 'slots', name: 'Slots', filterKey: 'slots' },
-  { id: 'table', name: 'Table', filterKey: 'table' },
+  { id: 'table', name: 'Craps', filterKey: 'table' },
 ];
 
 export const GamesSection = () => {
@@ -45,10 +45,10 @@ export const GamesSection = () => {
   // selectedProviders: array of provider 'filter' strings (e.g. ['arrowedge', 'betsoft', ...])
   const [selectedProviders, setSelectedProviders] = useState([]);
   const [isAllProvidersSelected, setIsAllProvidersSelected] = useState(true);
-  
+
   // Category state (only one can be active at a time)
   const [selectedCategory, setSelectedCategory] = useState(null); // null means all or specific active tab
-  
+
   // Search state
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -201,7 +201,7 @@ export const GamesSection = () => {
   const getGameCategoryLabel = (game) => {
     if (game.provider === 'luckystreak' || game.liveTable) return 'Live Table';
     if (game.fishing) return 'Fishing';
-    if (game.table) return 'Table';
+    if (game.table) return 'Craps';
     if (game.slots) return 'Slots';
     if (game.crash) return 'Crash';
     if (game.jackpots) return 'Jackpots';
@@ -229,21 +229,21 @@ export const GamesSection = () => {
   }, [selectedCategory]);
 
   return (
-    <section className="relative w-full py-10 sm:py-14 bg-[#181818] text-white overflow-hidden select-none">
+    <section className="relative w-full py-10 sm:py-14 bg-[#181818] text-white overflow-hidden select-none italic">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-amber-500/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-primary/5 rounded-full blur-[140px] pointer-events-none" />
 
       {/* Centered Controls & Header Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-          <p className="text-amber-400 font-extrabold uppercase tracking-widest text-xs sm:text-sm mb-2 drop-shadow-sm">
+          <p className="text-primary font-extrabold italic uppercase tracking-widest text-xs sm:text-sm mb-2 drop-shadow-sm">
             READY FOR THRILLS
           </p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black italic tracking-wide text-white uppercase leading-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
             A WIDE ARRAY OF GAMES
           </h2>
-          <p className="mt-3 text-neutral-400 text-sm sm:text-base leading-relaxed">
+          <p className="mt-3 text-neutral-400 text-sm sm:text-base leading-relaxed italic">
             Sourced from world-class developers with custom cinematic themes and maximum payout mechanics.
           </p>
         </div>
@@ -256,16 +256,18 @@ export const GamesSection = () => {
             <button
               type="button"
               onClick={() => setIsProvidersRowVisible((prev) => !prev)}
-              className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold tracking-wide transition-all duration-200 border cursor-pointer ${
+              className={`group flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold italic tracking-wide transition-all duration-200 border cursor-pointer ${
                 isProvidersRowVisible || !isAllProvidersSelected
-                  ? 'bg-[#1d1a12] border-amber-400 text-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.25)] ring-1 ring-amber-400/40'
-                  : 'bg-[#202022] hover:bg-[#28282b] border-neutral-700/80 text-neutral-200 hover:border-neutral-500'
+                  ? 'bg-[#1d1a12] border-primary text-primary shadow-[0_0_15px_rgba(248,196,94,0.25)] ring-1 ring-primary/40'
+                  : 'bg-[#383838] hover:bg-[#444444] border-neutral-600/80 text-neutral-200 hover:text-primary hover:border-primary'
               }`}
             >
               <span>{providerButtonText}</span>
               <ChevronDown
                 className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                  isProvidersRowVisible ? 'rotate-180 text-amber-400' : 'text-neutral-400'
+                  isProvidersRowVisible || !isAllProvidersSelected
+                    ? 'rotate-180 text-primary'
+                    : 'text-neutral-400 group-hover:text-primary'
                 }`}
               />
             </button>
@@ -279,10 +281,10 @@ export const GamesSection = () => {
                   key={category.id}
                   type="button"
                   onClick={() => handleCategoryClick(category.id)}
-                  className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold tracking-wide transition-all duration-200 border cursor-pointer ${
+                  className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold italic tracking-wide transition-all duration-200 border cursor-pointer ${
                     isActive
-                      ? 'bg-[#1d1a12] border-amber-400 text-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.25)] ring-1 ring-amber-400/40'
-                      : 'bg-[#202022] hover:bg-[#28282b] border-neutral-700/80 text-neutral-200 hover:border-neutral-500'
+                      ? 'bg-[#1d1a12] border-primary text-primary shadow-[0_0_15px_rgba(248,196,94,0.25)] ring-1 ring-primary/40'
+                      : 'bg-[#383838] hover:bg-[#444444] border-neutral-600/80 text-neutral-200 hover:text-primary hover:border-primary'
                   }`}
                 >
                   {category.name}
@@ -298,26 +300,26 @@ export const GamesSection = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search..."
-              className="w-full pl-4 pr-10 py-2.5 rounded-full bg-[#3a3746]/40 hover:bg-[#3a3746]/60 focus:bg-[#24222d] border border-neutral-700/80 focus:border-amber-400/80 text-xs sm:text-sm text-white placeholder-neutral-400 focus:outline-none focus:ring-1 focus:ring-amber-400/30 transition-all"
+              className="w-full pl-4 pr-10 py-2.5 rounded-full bg-[#A49FAF] hover:bg-[#b0abbb] focus:bg-[#A49FAF] border border-transparent hover:border-primary focus:border-primary text-xs sm:text-sm text-white font-semibold italic placeholder-white placeholder:italic focus:outline-none focus:ring-1 focus:ring-primary/40 transition-all"
             />
             {searchQuery ? (
               <button
                 type="button"
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white cursor-pointer"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-white hover:text-neutral-200 cursor-pointer transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
             ) : (
-              <Search className="w-4 h-4 text-neutral-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <Search className="w-4 h-4 text-white absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             )}
           </div>
         </div>
 
         {/* Row 2: Providers List Row shown horizontally when Providers Tab is clicked */}
         {isProvidersRowVisible && (
-          <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 mb-6 p-3 rounded-2xl bg-neutral-900/80 border border-neutral-800/80 backdrop-blur-md animate-in fade-in slide-in-from-top-2 duration-200">
-            <span className="text-neutral-400 text-xs font-bold uppercase tracking-wider mr-1 shrink-0">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 mb-6 p-3 rounded-2xl bg-neutral-900/80 border border-neutral-800/80 backdrop-blur-md animate-in fade-in slide-in-from-top-2 duration-200 italic">
+            <span className="text-neutral-400 text-xs font-bold italic uppercase tracking-wider mr-1 shrink-0">
               Select Providers:
             </span>
 
@@ -325,13 +327,13 @@ export const GamesSection = () => {
             <button
               type="button"
               onClick={handleToggleAllProviders}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold tracking-wide transition-all duration-200 border cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold italic tracking-wide transition-all duration-200 border cursor-pointer ${
                 isAllProvidersSelected
-                  ? 'bg-amber-400/20 text-amber-400 border-amber-400 shadow-[0_0_12px_rgba(245,158,11,0.25)] ring-1 ring-amber-400/30'
-                  : 'bg-neutral-800/80 hover:bg-neutral-700 text-neutral-300 border-neutral-700/80'
+                  ? 'bg-primary/20 text-primary border-primary shadow-[0_0_12px_rgba(248,196,94,0.25)] ring-1 ring-primary/30'
+                  : 'bg-[#383838] hover:bg-[#444444] text-neutral-300 border-neutral-600/80 hover:text-primary hover:border-primary'
               }`}
             >
-              {isAllProvidersSelected && <Check className="w-3.5 h-3.5 text-amber-400" />}
+              {isAllProvidersSelected && <Check className="w-3.5 h-3.5 text-primary" />}
               <span>All</span>
             </button>
 
@@ -347,18 +349,18 @@ export const GamesSection = () => {
                   key={provider.filter}
                   type="button"
                   onClick={() => handleToggleProvider(provider.filter)}
-                  className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold tracking-wide transition-all duration-200 border cursor-pointer ${
+                  className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold italic tracking-wide transition-all duration-200 border cursor-pointer ${
                     isSoleSelection
-                      ? 'bg-amber-400/20 text-amber-400 border-amber-400 shadow-[0_0_12px_rgba(245,158,11,0.25)] ring-1 ring-amber-400/30'
+                      ? 'bg-primary/20 text-primary border-primary shadow-[0_0_12px_rgba(248,196,94,0.25)] ring-1 ring-primary/30'
                       : isAllProvidersSelected
-                      ? 'bg-neutral-800/60 text-neutral-200 border-neutral-700/70 hover:bg-neutral-700/80'
-                      : 'bg-neutral-800/40 text-neutral-400 border-neutral-800/90 hover:bg-neutral-800 hover:text-neutral-200'
+                        ? 'bg-[#383838] text-neutral-200 border-neutral-600/70 hover:bg-[#444444] hover:text-primary hover:border-primary'
+                        : 'bg-[#383838] text-neutral-400 border-neutral-600/60 hover:bg-[#444444] hover:text-primary hover:border-primary'
                   }`}
                 >
                   {isSelected && (
                     <Check
                       className={`w-3.5 h-3.5 ${
-                        isSoleSelection ? 'text-amber-400' : 'text-neutral-400'
+                        isSoleSelection ? 'text-primary' : 'text-neutral-400'
                       }`}
                     />
                   )}
@@ -372,11 +374,11 @@ export const GamesSection = () => {
         {/* Section Title Row (e.g. 👾 New Games / Show All > or Show Less) */}
         <div className="flex items-center justify-between mb-5 pt-2">
           <div className="flex items-center gap-2.5">
-              <img src={newGameIcon} alt="new-game-icon" className='w-7 h-7' />
+            <img src={newGameIcon} alt="new-game-icon" className='w-7 h-7' />
             <h3 className="text-lg sm:text-xl font-black italic tracking-wide text-white uppercase">
               {activeCategoryTitle}
             </h3>
-            <span className="text-xs text-neutral-500 font-semibold">
+            <span className="text-xs text-neutral-500 font-semibold italic">
               ({filteredGames.length} games)
             </span>
           </div>
@@ -386,7 +388,7 @@ export const GamesSection = () => {
             <button
               type="button"
               onClick={() => setIsExpanded(!isExpanded)}
-              className="text-amber-400 hover:text-amber-300 text-xs sm:text-sm font-extrabold flex items-center gap-1.5 uppercase tracking-wider hover:underline cursor-pointer transition-colors"
+              className="text-primary hover:text-primary/80 text-xs sm:text-sm font-extrabold italic flex items-center gap-1.5 uppercase tracking-wider hover:underline cursor-pointer transition-colors"
             >
               <span>{isExpanded ? 'Show Less' : 'Show All'}</span>
               <span>{isExpanded ? '▲' : '▶'}</span>
@@ -415,11 +417,11 @@ export const GamesSection = () => {
         /* Error State */
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-16 text-center bg-neutral-900/40 rounded-3xl border border-neutral-800 p-8">
-            <p className="text-red-400 font-bold mb-4">{error}</p>
+            <p className="text-red-400 font-bold italic mb-4">{error}</p>
             <button
               type="button"
               onClick={() => window.location.reload()}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-400 text-black font-extrabold text-xs uppercase tracking-wider hover:bg-amber-300 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-black font-extrabold italic text-xs uppercase tracking-wider hover:bg-primary/90 transition-colors cursor-pointer"
             >
               <RefreshCw className="w-3.5 h-3.5" />
               <span>Retry</span>
@@ -430,8 +432,8 @@ export const GamesSection = () => {
         /* Empty State */
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-16 text-center bg-neutral-900/40 rounded-3xl border border-neutral-800/80 p-8">
-            <p className="text-neutral-400 font-bold text-base mb-2">No games found</p>
-            <p className="text-neutral-500 text-xs max-w-sm mx-auto mb-5">
+            <p className="text-neutral-400 font-bold italic text-base mb-2">No games found</p>
+            <p className="text-neutral-500 text-xs italic max-w-sm mx-auto mb-5">
               Try adjusting your provider selection, category tab, or search query.
             </p>
             <button
@@ -441,7 +443,7 @@ export const GamesSection = () => {
                 setSelectedCategory(null);
                 setSearchQuery('');
               }}
-              className="px-4 py-2 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-amber-400 text-xs font-bold transition-colors cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-primary border border-primary/30 hover:border-primary text-xs font-bold italic transition-colors cursor-pointer"
             >
               Reset Filters
             </button>
@@ -457,7 +459,7 @@ export const GamesSection = () => {
               return (
                 <div
                   key={game._id || game.gameId}
-                  className="group relative aspect-[4/5] rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-800/90 hover:border-amber-500/50 shadow-md hover:shadow-[0_8px_25px_rgba(245,158,11,0.15)] transition-all duration-300 cursor-pointer flex flex-col justify-end"
+                  className="group relative aspect-[4/5] rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-800/90 hover:border-primary shadow-md hover:shadow-[0_8px_25px_rgba(248,196,94,0.2)] transition-all duration-300 cursor-pointer flex flex-col justify-end"
                 >
                   <img
                     src={game.image}
@@ -471,15 +473,15 @@ export const GamesSection = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-10 scale-90 group-hover:scale-100">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-black flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.6)] font-black">
+                    <div className="w-12 h-12 rounded-full bg-primary text-black flex items-center justify-center shadow-[0_0_20px_rgba(248,196,94,0.6)] font-black">
                       <Play className="w-5 h-5 fill-black ml-0.5" />
                     </div>
                   </div>
                   <div className="relative z-10 w-full p-2.5 sm:p-3 bg-black/80 backdrop-blur-md border-t border-white/5 text-center">
-                    <h4 className="text-white font-extrabold text-xs sm:text-[13px] tracking-wide uppercase truncate leading-tight drop-shadow-sm">
+                    <h4 className="text-white font-extrabold italic text-xs sm:text-[13px] tracking-wide uppercase truncate leading-tight drop-shadow-sm">
                       {game.name}
                     </h4>
-                    <p className="text-amber-400 font-bold text-[10px] sm:text-[11px] uppercase tracking-wider mt-0.5 drop-shadow-[0_0_8px_rgba(245,158,11,0.3)]">
+                    <p className="text-primary font-bold italic text-[10px] sm:text-[11px] uppercase tracking-wider mt-0.5 drop-shadow-[0_0_8px_rgba(248,196,94,0.3)]">
                       {categoryLabel}
                     </p>
                   </div>
@@ -502,7 +504,7 @@ export const GamesSection = () => {
             type="button"
             onClick={handleScrollLeft}
             aria-label="Scroll Left"
-            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/80 hover:bg-black text-amber-400 hover:text-amber-300 border border-amber-500/40 hover:border-amber-400 shadow-[0_0_20px_rgba(0,0,0,0.8)] flex items-center justify-center backdrop-blur-md opacity-0 group-hover/slider:opacity-100 transition-all duration-200 cursor-pointer hover:scale-110"
+            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/80 hover:bg-black text-primary border border-primary/40 hover:border-primary shadow-[0_0_20px_rgba(0,0,0,0.8)] flex items-center justify-center backdrop-blur-md opacity-0 group-hover/slider:opacity-100 transition-all duration-200 cursor-pointer hover:scale-110"
           >
             <span className="text-base sm:text-lg font-black font-mono">◀</span>
           </button>
@@ -512,7 +514,7 @@ export const GamesSection = () => {
             type="button"
             onClick={handleScrollRight}
             aria-label="Scroll Right"
-            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/80 hover:bg-black text-amber-400 hover:text-amber-300 border border-amber-500/40 hover:border-amber-400 shadow-[0_0_20px_rgba(0,0,0,0.8)] flex items-center justify-center backdrop-blur-md opacity-0 group-hover/slider:opacity-100 transition-all duration-200 cursor-pointer hover:scale-110"
+            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/80 hover:bg-black text-primary border border-primary/40 hover:border-primary shadow-[0_0_20px_rgba(0,0,0,0.8)] flex items-center justify-center backdrop-blur-md opacity-0 group-hover/slider:opacity-100 transition-all duration-200 cursor-pointer hover:scale-110"
           >
             <span className="text-base sm:text-lg font-black font-mono">▶</span>
           </button>
@@ -529,7 +531,7 @@ export const GamesSection = () => {
                 return (
                   <div
                     key={game._id || game.gameId}
-                    className="group relative aspect-[4/5] rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-800/90 hover:border-amber-500/50 shadow-md hover:shadow-[0_8px_25px_rgba(245,158,11,0.15)] transition-all duration-300 cursor-pointer flex flex-col justify-end shrink-0"
+                    className="group relative aspect-[4/5] rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-800/90 hover:border-primary shadow-md hover:shadow-[0_8px_25px_rgba(248,196,94,0.2)] transition-all duration-300 cursor-pointer flex flex-col justify-end shrink-0"
                   >
                     <img
                       src={game.image}
@@ -543,15 +545,15 @@ export const GamesSection = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-10 scale-90 group-hover:scale-100">
-                      <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-black flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.6)] font-black">
+                      <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-primary text-black flex items-center justify-center shadow-[0_0_20px_rgba(248,196,94,0.6)] font-black">
                         <Play className="w-4 h-4 sm:w-5 sm:h-5 fill-black ml-0.5" />
                       </div>
                     </div>
                     <div className="relative z-10 w-full p-2.5 sm:p-3 bg-black/80 backdrop-blur-md border-t border-white/5 text-center">
-                      <h4 className="text-white font-extrabold text-xs sm:text-[13px] tracking-wide uppercase truncate leading-tight drop-shadow-sm">
+                      <h4 className="text-white font-extrabold italic text-xs sm:text-[13px] tracking-wide uppercase truncate leading-tight drop-shadow-sm">
                         {game.name}
                       </h4>
-                      <p className="text-amber-400 font-bold text-[10px] sm:text-[11px] uppercase tracking-wider mt-0.5 drop-shadow-[0_0_8px_rgba(245,158,11,0.3)]">
+                      <p className="text-primary font-bold italic text-[10px] sm:text-[11px] uppercase tracking-wider mt-0.5 drop-shadow-[0_0_8px_rgba(248,196,94,0.3)]">
                         {categoryLabel}
                       </p>
                     </div>

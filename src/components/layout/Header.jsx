@@ -3,11 +3,13 @@ import { Menu } from 'lucide-react';
 import { Logo } from '../common/Logo';
 import { Button } from '../common/Button';
 import { MobileNav } from './MobileNav';
+import { useTheme } from '../../theme/ThemeProvider';
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [activeNav, setActiveNav] = useState('Home');
+const { theme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,10 +52,10 @@ export const Header = () => {
                   key={link.name}
                   href={link.href}
                   onClick={() => setActiveNav(link.name)}
-                  className={`text-sm lg:text-base font-bold transition-all duration-200 tracking-wide select-none ${
+                  className={`text-sm lg:text-base font-bold italic transition-all duration-200 tracking-wide select-none ${
                     isActive
-                      ? 'text-[#f59e0b] font-black drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]'
-                      : 'text-white hover:text-[#f59e0b]'
+                      ? 'text-primary font-black drop-shadow-[0_0_8px_rgba(255,200,0,0.4)]'
+                      : 'text-white hover:text-primary'
                   }`}
                 >
                   {link.name}
@@ -68,7 +70,7 @@ export const Header = () => {
             {/* SIGN IN Text Button */}
             <button
               type="button"
-              className="text-xs sm:text-sm font-black tracking-wider uppercase text-white hover:text-[#f59e0b] transition-colors px-2 py-1 select-none cursor-pointer"
+              className="text-sm lg:text-base font-black italic tracking-wider uppercase text-white hover:text-primary transition-colors px-2 py-1 select-none cursor-pointer"
             >
               SIGN IN
             </button>
@@ -76,8 +78,8 @@ export const Header = () => {
             {/* JOIN NOW Primary Button with exact specification */}
             <Button
               variant="primary"
-              size="sm"
-              className="text-xs sm:text-sm font-black tracking-wider"
+              size="md"
+              className="text-xs sm:text-sm font-black italic tracking-wider"
             >
               JOIN NOW
             </Button>
@@ -86,7 +88,7 @@ export const Header = () => {
             <button
               type="button"
               onClick={() => setIsMobileNavOpen(true)}
-              className="md:hidden p-2 rounded-xl bg-neutral-900 border border-neutral-800 text-white hover:text-[#f59e0b] focus:outline-none"
+              className="md:hidden p-2 rounded-xl bg-neutral-900 border border-neutral-800 text-white hover:text-primary focus:outline-none"
               aria-label="Open navigation menu"
             >
               <Menu className="w-5 h-5" />

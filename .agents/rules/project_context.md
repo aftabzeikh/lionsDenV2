@@ -1,3 +1,7 @@
+---
+trigger: always_on
+---
+
 # LionsDenGaming Project Context & Rules
 
 ## Core Project Information

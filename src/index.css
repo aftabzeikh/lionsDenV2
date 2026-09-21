@@ -94,7 +94,7 @@
   }
 
   :root {
-    --color-primary: #F8C45E;
+    --color-primary: #FFC800;
     --color-secondary: #475569;
     --color-accent: #8b5cf6;
     --color-background: #000000;
@@ -130,7 +130,7 @@
     border-radius: 4px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #eab308;
+    background: #FFC800;
   }
 }
 

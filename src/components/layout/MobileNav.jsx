@@ -43,7 +43,7 @@ export const MobileNav = ({ isOpen, onClose }) => {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-full border border-neutral-700 text-white font-black text-xs uppercase tracking-wider hover:border-amber-400 hover:text-amber-400 transition-colors"
+              className="px-4 py-2 rounded-full border border-neutral-700 text-white font-black italic text-xs uppercase tracking-wider hover:border-primary hover:text-primary transition-colors"
             >
               SIGN IN
             </button>
@@ -51,7 +51,7 @@ export const MobileNav = ({ isOpen, onClose }) => {
               variant="primary"
               size="sm"
               onClick={onClose}
-              className="w-full text-xs font-black uppercase tracking-wider"
+              className="w-full text-xs font-black italic uppercase tracking-wider"
             >
               JOIN NOW
             </Button>
@@ -66,13 +66,13 @@ export const MobileNav = ({ isOpen, onClose }) => {
                   key={item.label}
                   href={item.href}
                   onClick={onClose}
-                  className={`flex items-center gap-3 px-3.5 py-3 rounded-xl text-sm font-bold transition-all ${
+                  className={`flex items-center gap-3 px-3.5 py-3 rounded-xl text-sm font-bold italic transition-all ${
                     item.active
-                      ? 'bg-amber-400/10 text-amber-400 border border-amber-400/30'
+                      ? 'bg-primary/10 text-primary border border-primary/30'
                       : 'text-neutral-300 hover:text-white hover:bg-neutral-900'
                   }`}
                 >
-                  <Icon className="w-4 h-4 text-amber-400" />
+                  <Icon className="w-4 h-4 text-primary" />
                   <span>{item.label}</span>
                 </a>
               );
@@ -82,7 +82,7 @@ export const MobileNav = ({ isOpen, onClose }) => {
 
         {/* Footer info in drawer */}
         <div className="pt-6 border-t border-neutral-800 mt-6 text-center">
-          <p className="text-xs text-neutral-500">
+          <p className="text-xs italic text-neutral-500">
             Lions Den Games • All Rights Reserved
           </p>
         </div>
