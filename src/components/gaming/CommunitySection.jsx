@@ -7,10 +7,10 @@ import tiktokIcon from '../../assets/images/community/tiktok.png';
 
 export const CommunitySection = () => {
   const socialFollowLinks = [
-    { name: 'Facebook', icon: fbIcon, href: 'https://facebook.com' },
-    { name: 'Instagram', icon: instaIcon, href: 'https://instagram.com' },
-    { name: 'YouTube', icon: ytIcon, href: 'https://youtube.com' },
-    { name: 'TikTok', icon: tiktokIcon, href: 'https://tiktok.com' },
+    { name: 'Facebook', icon: fbIcon, href: 'https://www.tiktok.com/@lionsdengame' },
+    { name: 'Instagram', icon: instaIcon, href: 'https://www.instagram.com/lionsdengames' },
+    { name: 'YouTube', icon: ytIcon, href: 'https://www.youtube.com/@lionsdengames' },
+    { name: 'TikTok', icon: tiktokIcon, href: 'https://www.tiktok.com/@lionsdengame' },
   ];
 
   return (

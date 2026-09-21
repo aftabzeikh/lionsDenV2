@@ -17,10 +17,10 @@ export const Footer = () => {
   const currentYear = 2026;
 
   const socialLinks = [
-    { name: 'Facebook', icon: fbIcon, href: 'https://facebook.com' },
-    { name: 'Instagram', icon: instaIcon, href: 'https://instagram.com' },
-    { name: 'TikTok', icon: tiktokIcon, href: 'https://tiktok.com' },
-    { name: 'YouTube', icon: ytIcon, href: 'https://youtube.com' },
+   { name: 'Facebook', icon: fbIcon, href: 'https://www.tiktok.com/@lionsdengame' },
+      { name: 'Instagram', icon: instaIcon, href: 'https://www.instagram.com/lionsdengames' },
+      { name: 'YouTube', icon: ytIcon, href: 'https://www.youtube.com/@lionsdengames' },
+      { name: 'TikTok', icon: tiktokIcon, href: 'https://www.tiktok.com/@lionsdengame' },  
   ];
 
   const gameLinks = [
