@@ -1,0 +1,286 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+/* Aneba Neue Font Declarations */
+@layer base {
+  @font-face {
+    font-family: 'Aneba Neue';
+    src: url('./assets/fonts/AnebaNeue/AnebaNeue-UltraLight.woff2') format('woff2'),
+         url('./assets/fonts/AnebaNeue/AnebaNeue-UltraLight.woff') format('woff');
+    font-weight: 200 300;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Aneba Neue';
+    src: url('./assets/fonts/AnebaNeue/AnebaNeue-UltraLightitalic.woff2') format('woff2'),
+         url('./assets/fonts/AnebaNeue/AnebaNeue-UltraLightitalic.woff') format('woff');
+    font-weight: 200 300;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Aneba Neue';
+    src: url('./assets/fonts/AnebaNeue/AnebaNeue-Regular.woff2') format('woff2'),
+         url('./assets/fonts/AnebaNeue/AnebaNeue-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Aneba Neue';
+    src: url('./assets/fonts/AnebaNeue/AnebaNeue-Italic.woff2') format('woff2'),
+         url('./assets/fonts/AnebaNeue/AnebaNeue-Italic.woff') format('woff');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Aneba Neue';
+    src: url('./assets/fonts/AnebaNeue/AnebaNeue-Medium.woff2') format('woff2'),
+         url('./assets/fonts/AnebaNeue/AnebaNeue-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Aneba Neue';
+    src: url('./assets/fonts/AnebaNeue/AnebaNeue-Mediumitalic.woff2') format('woff2'),
+         url('./assets/fonts/AnebaNeue/AnebaNeue-Mediumitalic.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Aneba Neue';
+    src: url('./assets/fonts/AnebaNeue/AnebaNeue-SemiBold.woff2') format('woff2'),
+         url('./assets/fonts/AnebaNeue/AnebaNeue-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Aneba Neue';
+    src: url('./assets/fonts/AnebaNeue/AnebaNeue-SemiBolditalic.woff2') format('woff2'),
+         url('./assets/fonts/AnebaNeue/AnebaNeue-SemiBolditalic.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Aneba Neue';
+    src: url('./assets/fonts/AnebaNeue/AnebaNeue-Bold.woff2') format('woff2'),
+         url('./assets/fonts/AnebaNeue/AnebaNeue-Bold.woff') format('woff');
+    font-weight: 700 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Aneba Neue';
+    src: url('./assets/fonts/AnebaNeue/AnebaNeue-Bolditalic.woff2') format('woff2'),
+         url('./assets/fonts/AnebaNeue/AnebaNeue-Bolditalic.woff') format('woff');
+    font-weight: 700 900;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  :root {
+    --color-primary: #F8C45E;
+    --color-secondary: #475569;
+    --color-accent: #8b5cf6;
+    --color-background: #000000;
+    --color-surface: #0f172a;
+    --color-card: #1e293b;
+    --color-text: #f8fafc;
+    --color-muted: #94a3b8;
+    --color-border: #334155;
+    --color-success: #22c55e;
+    --color-warning: #f59e0b;
+    --color-danger: #ef4444;
+  }
+
+  html, body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: "Aneba Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #020617;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #eab308;
+  }
+}
+
+/* Primary Button Gaming Style - Exact Spec */
+.btn-primary-spec {
+  border-radius: 37px !important;
+  border: 1.5px solid transparent !important;
+  background: 
+    linear-gradient(95.84deg, #B77E15 4.79%, #F8C45E 51.55%, #B77E15 101.36%) padding-box,
+    linear-gradient(96.73deg, #F8C457 7.78%, #A16600 52.2%, #F8C457 96.62%) border-box !important;
+  color: #020617 !important;
+}
+
+/* Animations for floating cards & particles */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(3deg);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(-4deg);
+  }
+}
+
+@keyframes float-delayed {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(5deg);
+  }
+}
+
+@keyframes snow {
+  0% {
+    transform: translateY(-10px) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(105vh) translateX(40px);
+    opacity: 0;
+  }
+}
+
+@keyframes leaves {
+  0% {
+    transform: translateY(-10px) rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(105vh) rotate(360deg) translateX(60px);
+    opacity: 0;
+  }
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 5s ease-in-out infinite 1s;
+}
+
+.animate-snow {
+  animation: snow linear infinite;
+}
+
+.animate-leaves {
+  animation: leaves ease-in infinite;
+}
+
+/* Hide scrollbars for pill navigation */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Continuous marquee slider */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Outlined text stroke utilities */
+.text-stroke-white {
+  -webkit-text-stroke: 1.5px #ffffff;
+  color: transparent;
+}
+
+.text-stroke-gold {
+  -webkit-text-stroke: 1.5px #F8C45E;
+  color: transparent;
+}
+
+@media (min-width: 768px) {
+  .text-stroke-white {
+    -webkit-text-stroke: 2px #ffffff;
+  }
+  .text-stroke-gold {
+    -webkit-text-stroke: 2px #F8C45E;
+  }
+}
+
