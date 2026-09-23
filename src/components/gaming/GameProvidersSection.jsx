@@ -11,7 +11,7 @@ import RiverSweepsLogo from '../../assets/images/platformLogo/RiverSweepsLogo.pn
 import VblinkLogo from '../../assets/images/platformLogo/Vblink Logo.png';
 import VegasXLogo from '../../assets/images/platformLogo/VegasXLogo.png';
 import GameLogo from '../../assets/images/platformLogo/gamelogo.png';
-import providerIcon from '../../assets/images/table-icon.svg';
+import providerIcon from '../../assets/images/providers-icon.svg';
 
 const providersList = [
   { id: 'orion-stars', name: 'Orion Stars', logo: OrionStarsLogo },

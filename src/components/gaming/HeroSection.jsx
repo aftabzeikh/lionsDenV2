@@ -43,8 +43,8 @@ export const HeroSection = () => {
             <div className="pt-2">
               <Button
                 variant="primary"
-                size="lg"
-                className="px-8 sm:px-10 py-3 sm:py-3.5 text-sm sm:text-base font-black tracking-wider shadow-[0_0_25px_rgba(248,196,94,0.4)] hover:shadow-[0_0_35px_rgba(248,196,94,0.7)]"
+                size="xl"
+                className="px-6 italic sm:px-8 py-2 sm:py-3 text-lg sm:text-xl font-black leading-none tracking-wider shadow-[0_0_25px_rgba(248,196,94,0.4)] hover:shadow-[0_0_35px_rgba(248,196,94,0.7)]"
               >
                 PLAY NOW
               </Button>

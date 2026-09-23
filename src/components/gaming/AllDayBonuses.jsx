@@ -4,38 +4,38 @@ const bonusesList = [
   {
     id: 'midnight',
     title: 'MID-NIGHT SPECIAL',
-    gradient: 'from-[#ff6b81] via-[#ff7979] to-[#ff8e8e]',
-    glow: 'shadow-[0_0_22px_rgba(255,107,129,0.55)] hover:shadow-[0_0_32px_rgba(255,107,129,0.85)]',
+    background: 'linear-gradient(90deg, #FF7676 0%, #FFC3C3 48%, #FF7676 100%)',
+    glow: 'shadow-[0_0_22px_rgba(255,118,118,0.55)] hover:shadow-[0_0_32px_rgba(255,118,118,0.85)]',
   },
   {
     id: 'morning',
     title: 'MORNING COFFEE',
-    gradient: 'from-[#a8e063] via-[#b8f24a] to-[#d4fc79]',
-    glow: 'shadow-[0_0_22px_rgba(184,242,74,0.55)] hover:shadow-[0_0_32px_rgba(184,242,74,0.85)]',
+    background: 'linear-gradient(90deg, #CDFF76 0%, #ECFFCB 48%, #CDFF76 100%)',
+    glow: 'shadow-[0_0_22px_rgba(205,255,118,0.55)] hover:shadow-[0_0_32px_rgba(205,255,118,0.85)]',
   },
   {
     id: 'lunch',
     title: 'LUNCH SPECIAL',
-    gradient: 'from-[#e056fd] via-[#eb8cfc] to-[#f49eff]',
-    glow: 'shadow-[0_0_22px_rgba(224,86,253,0.55)] hover:shadow-[0_0_32px_rgba(224,86,253,0.85)]',
+    background: 'linear-gradient(90deg, #E876FF 0%, #F1ABFF 48%, #E876FF 100%)',
+    glow: 'shadow-[0_0_22px_rgba(232,118,255,0.55)] hover:shadow-[0_0_32px_rgba(232,118,255,0.85)]',
   },
   {
     id: 'happy-hour',
     title: 'HAPPY HOUR',
-    gradient: 'from-[#48dbfb] via-[#68d8d6] to-[#88d49e]',
-    glow: 'shadow-[0_0_22px_rgba(72,219,251,0.55)] hover:shadow-[0_0_32px_rgba(72,219,251,0.85)]',
+    background: 'linear-gradient(90deg, #76C1FF 0%, #C0E2FF 48%, #76C1FF 100%)',
+    glow: 'shadow-[0_0_22px_rgba(118,193,255,0.55)] hover:shadow-[0_0_32px_rgba(118,193,255,0.85)]',
   },
   {
     id: 'refer',
     title: 'REFER & EARN',
-    gradient: 'from-[#f9ca24] via-[#fbc531] to-[#f9d71c]',
-    glow: 'shadow-[0_0_22px_rgba(249,202,36,0.55)] hover:shadow-[0_0_32px_rgba(249,202,36,0.85)]',
+    background: 'linear-gradient(90deg, #FFC800 0%, #FFE792 48%, #FFC800 100%)',
+    glow: 'shadow-[0_0_22px_rgba(255,200,0,0.55)] hover:shadow-[0_0_32px_rgba(255,200,0,0.85)]',
   },
   {
     id: 'first-deposit',
     title: 'FIRST DEPOSIT',
-    gradient: 'from-[#ff9f43] via-[#ffa834] to-[#feca57]',
-    glow: 'shadow-[0_0_22px_rgba(255,159,67,0.55)] hover:shadow-[0_0_32px_rgba(255,159,67,0.85)]',
+    background: 'linear-gradient(90deg, #FF76D6 0%, #FFC7EE 48%, #FF76D6 100%)',
+    glow: 'shadow-[0_0_22px_rgba(255,118,214,0.55)] hover:shadow-[0_0_32px_rgba(255,118,214,0.85)]',
   },
 ];
 
@@ -68,7 +68,8 @@ export const AllDayBonuses = () => {
                 {bonusesList.map((bonus) => (
                   <div
                     key={`${setIndex}-${bonus.id}`}
-                    className={`bg-gradient-to-r ${bonus.gradient} ${bonus.glow} px-6 sm:px-8 py-3 sm:py-3.5 rounded-2xl cursor-pointer transform transition-all duration-300 hover:scale-105 active:scale-95 shrink-0 border border-white/30`}
+                    style={{ background: bonus.background }}
+                    className={`${bonus.glow} px-6 sm:px-8 py-3 sm:py-3.5 rounded-2xl cursor-pointer transform transition-all duration-300 hover:scale-105 active:scale-95 shrink-0 border border-white/30`}
                   >
                     <span className="text-black font-black italic tracking-wider text-sm sm:text-base md:text-lg uppercase">
                       {bonus.title}

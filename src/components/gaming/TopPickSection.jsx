@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { Flame, Play, ChevronLeft, ChevronRight } from 'lucide-react';
 import { selectTopPicks } from '../../redux/slices/gamesSlice';
-import flameIcon from '../../assets/images/hot-icon.svg'
+import flameIcon from '../../assets/images/top-pick-icon.svg'
 
 export const TopPickSection = ({ games: propGames }) => {
   const reduxTopPicks = useSelector(selectTopPicks);
@@ -141,7 +141,7 @@ export const TopPickSection = ({ games: propGames }) => {
           onScroll={handleScroll}
           className="w-full overflow-x-auto no-scrollbar scroll-smooth px-4 sm:px-8 lg:px-12 py-3"
         >
-          <div className="flex items-center gap-7 sm:gap-9 md:gap-11 w-max pl-2 pr-12">
+          <div className="flex items-center gap-4 sm:gap-5 md:gap-6 w-max pl-2 pr-12">
             {repeatedSets.flatMap((setIndex) =>
               topPicks.map((game, index) => {
                 const rank = index + 1;
@@ -159,8 +159,8 @@ export const TopPickSection = ({ games: propGames }) => {
                       <span
                         className={`font-black italic leading-none tracking-tighter drop-shadow-[0_0_12px_rgba(255,255,255,0.08)] select-none ${
                           rank === 10
-                            ? 'text-[95px] sm:text-[120px] md:text-[140px]'
-                            : 'text-[115px] sm:text-[145px] md:text-[165px]'
+                            ? 'text-[105px] sm:text-[130px] md:text-[150px]'
+                            : 'text-[125px] sm:text-[155px] md:text-[175px]'
                         }`}
                         style={{
                           WebkitTextStroke: '2.5px rgba(255, 255, 255, 0.85)',
@@ -173,35 +173,33 @@ export const TopPickSection = ({ games: propGames }) => {
                     </div>
 
                     {/* Game Card Container */}
-                    <div className="relative z-10 w-[150px] sm:w-[175px] md:w-[195px] aspect-[4/5] rounded-2xl overflow-hidden bg-black border border-neutral-800/90 group-hover:border-amber-400 shadow-lg group-hover:shadow-[0_8px_30px_rgba(245,158,11,0.25)] transition-all duration-300 flex flex-col justify-end">
-                      {/* Game Thumbnail Image */}
-                      <img
-                        src={game.image}
-                        alt={game.name}
-                        loading="lazy"
-                        onError={(e) => {
-                          e.target.src =
-                            'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80';
-                        }}
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-
-                      {/* Subtle Top-to-Bottom Shading */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80 group-hover:opacity-70 transition-opacity duration-300" />
-
-                      {/* Glowing Play Hover Button */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 scale-90 group-hover:scale-100 pointer-events-none">
-                        <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-black flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.7)] font-black">
-                          <Play className="w-4 h-4 sm:w-5 sm:h-5 fill-black ml-0.5" />
+                    <div className="relative z-10 w-[165px] sm:w-[195px] md:w-[220px] rounded-2xl overflow-hidden bg-black border border-neutral-800/90 shadow-md transition-all duration-200 ease-out cursor-pointer flex flex-col justify-between">
+                      {/* Dedicated Image Container */}
+                      <div className="relative w-full aspect-square overflow-hidden bg-black">
+                        <img
+                          src={game.image}
+                          alt={game.name}
+                          loading="lazy"
+                          onError={(e) => {
+                            e.target.src =
+                              'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80';
+                          }}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-all duration-200 ease-out"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:bg-black/45 transition-all duration-200 ease-out pointer-events-none" />
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 ease-out z-10 scale-90 group-hover:scale-100 pointer-events-none">
+                          <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/40 border-[3px] border-white text-white flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                            <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-white text-white ml-0.5" />
+                          </div>
                         </div>
                       </div>
 
                       {/* Bottom Info Bar: Game Title + Yellow Category */}
-                      <div className="relative z-20 w-full p-2.5 sm:p-3 bg-black/90 backdrop-blur-md border-t border-white/5 text-center">
+                      <div className="relative z-10 w-full p-2 sm:p-2.5 bg-black border-t border-white/5 text-center shrink-0">
                         <h4 className="text-white font-black text-xs sm:text-[13px] tracking-wide uppercase truncate leading-tight drop-shadow-sm">
                           {game.name}
                         </h4>
-                        <p className="text-amber-400 font-bold text-[10px] sm:text-[11px] uppercase tracking-wider mt-0.5 drop-shadow-[0_0_8px_rgba(245,158,11,0.3)]">
+                        <p className="text-primary font-bold text-[10px] sm:text-[11px] uppercase tracking-wider mt-0.5 drop-shadow-[0_0_8px_rgba(248,196,94,0.3)]">
                           {categoryName}
                         </p>
                       </div>

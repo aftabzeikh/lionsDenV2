@@ -18,7 +18,7 @@ export const JoinPrideSection = () => {
 
   return (
     <section
-      className="relative w-full py-20 md:py-28 bg-cover bg-center overflow-hidden select-none"
+      className="relative w-full py-10 md:py-18 bg-cover bg-center overflow-hidden select-none"
       style={{
         backgroundImage: `url(${bgJoinPride})`,
       }}
@@ -30,8 +30,8 @@ export const JoinPrideSection = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center flex flex-col items-center">
         
         {/* Subtitle */}
-        <p className="text-amber-400 font-extrabold uppercase tracking-widest text-xs sm:text-sm mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-          LOREM IPSUM
+        <p className="text-primary italic font-extrabold uppercase tracking-widest text-sm md:text-base lg:text-lg mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          GET STARTED
         </p>
 
         {/* Main Heading */}

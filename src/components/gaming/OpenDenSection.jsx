@@ -3,11 +3,11 @@ import openLionImg from '../../assets/images/open-lion.png';
 
 export const OpenDenSection = () => {
   return (
-    <section className="relative w-full py-16 md:py-24 bg-[#141414] overflow-hidden select-none border-t border-neutral-900">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center">
+    <section className="relative w-full py-16 md:py-24 bg-[#262626] overflow-hidden select-none border-t border-neutral-900">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center">
         
         {/* Main Featured Experience Banner Card */}
-        <div className="w-full bg-[#0d0d0d] border border-[#a67c2e]/70 rounded-[28px] sm:rounded-[36px] shadow-[0_10px_30px_rgba(0,0,0,0.8)] relative flex flex-col lg:flex-row items-center justify-between min-h-[360px] lg:min-h-[400px]">
+        <div className="w-full bg-[#0d0d0d] border border-[#a67c2e]/70 rounded-[28px] sm:rounded-[36px] shadow-[0_10px_30px_rgba(0,0,0,0.8)] relative flex flex-col lg:flex-row items-center justify-between min-h-[360px] lg:min-h-[460px]">
           
           {/* Left Text Content */}
           <div className="w-full lg:w-3/5 p-8 sm:p-12 lg:pl-12 lg:pr-4 flex flex-col justify-center items-start text-left z-20">

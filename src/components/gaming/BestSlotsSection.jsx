@@ -57,7 +57,7 @@ export const BestSlotsSection = () => {
   };
 
   return (
-    <section className="relative w-full py-14 sm:py-18 bg-[#111111] text-white overflow-hidden select-none border-t border-neutral-900/80">
+    <section className="relative w-full py-14 sm:py-18 bg-[#181818] text-white overflow-hidden select-none border-t border-neutral-900/80">
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-amber-500/5 rounded-full blur-[160px] pointer-events-none" />
 
@@ -103,36 +103,34 @@ export const BestSlotsSection = () => {
                   <div
                     key={`${game._id || game.gameId || i}-${actualIndex}`}
                     onClick={() => handleSelectGame(actualIndex)}
-                    className="group relative aspect-[4/5] rounded-2xl overflow-hidden bg-black border border-neutral-800/90 hover:border-amber-400/80 shadow-md hover:shadow-[0_8px_25px_rgba(245,158,11,0.2)] transition-all duration-300 cursor-pointer flex flex-col justify-end opacity-90 hover:opacity-100 hover:scale-[1.02]"
+                    className="group relative rounded-2xl overflow-hidden bg-black border border-neutral-800/90 shadow-md transition-all duration-200 ease-out cursor-pointer flex flex-col justify-between"
                   >
-                    {/* Thumbnail Image */}
-                    <img
-                      src={game.image}
-                      alt={game.name}
-                      loading="lazy"
-                      onError={(e) => {
-                        e.target.src =
-                          'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80';
-                      }}
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-
-                    {/* Dark gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent opacity-85" />
-
-                    {/* Active Play Icon indicator on hover */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-10 scale-90 group-hover:scale-100">
-                      <div className="w-9 h-9 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-black flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,0.6)] font-black">
-                        <Play className="w-4 h-4 fill-black ml-0.5" />
+                    {/* Dedicated Image Container */}
+                    <div className="relative w-full aspect-square overflow-hidden bg-black">
+                      <img
+                        src={game.image}
+                        alt={game.name}
+                        loading="lazy"
+                        onError={(e) => {
+                          e.target.src =
+                            'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80';
+                        }}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-all duration-200 ease-out"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:bg-black/45 transition-all duration-200 ease-out pointer-events-none" />
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 ease-out z-10 scale-90 group-hover:scale-100 pointer-events-none">
+                        <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/40 border-[3px] border-white text-white flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                          <Play className="w-4 h-4 sm:w-5 sm:h-5 fill-white text-white ml-0.5" />
+                        </div>
                       </div>
                     </div>
 
                     {/* Bottom label */}
-                    <div className="relative z-10 w-full p-2 bg-black/90 backdrop-blur-md border-t border-white/5 text-center">
-                      <h4 className="text-white font-extrabold text-[11px] sm:text-xs tracking-wide uppercase truncate leading-tight drop-shadow-sm">
+                    <div className="relative z-10 w-full p-1.5 sm:p-2 bg-black border-t border-white/5 text-center shrink-0">
+                      <h4 className="text-white font-black text-[11px] sm:text-xs tracking-wide uppercase truncate leading-tight drop-shadow-sm">
                         {game.name}
                       </h4>
-                      <p className="text-amber-400 font-bold text-[9px] sm:text-[10px] uppercase tracking-wider mt-0.5">
+                      <p className="text-primary font-bold text-[9px] sm:text-[10px] uppercase tracking-wider mt-0.5 drop-shadow-[0_0_8px_rgba(248,196,94,0.3)]">
                         {categoryLabel}
                       </p>
                     </div>
@@ -148,7 +146,7 @@ export const BestSlotsSection = () => {
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
-            <div className="relative w-full h-full min-h-[380px] sm:min-h-[460px] lg:min-h-[500px] rounded-3xl sm:rounded-[32px] overflow-hidden bg-neutral-950 border border-neutral-800/80 shadow-[0_16px_50px_rgba(0,0,0,0.85)] group">
+            <div className="relative w-full h-full min-h-[380px] sm:min-h-[460px] lg:min-h-[500px] rounded-3xl sm:rounded-[32px] overflow-hidden bg-neutral-900 border border-neutral-800/90 shadow-2xl group cursor-pointer transition-all duration-200 ease-out">
               
               {/* Main Showcase Game Image with Animated Transition */}
               <div
@@ -166,17 +164,17 @@ export const BestSlotsSection = () => {
                     e.target.src =
                       'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80';
                   }}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-200 ease-out"
                 />
 
-                {/* Subtle edge shading */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
+                {/* Unified Dark Gradient & Hover Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent group-hover:bg-black/45 transition-all duration-200 ease-out pointer-events-none" />
               </div>
 
-              {/* Hover Play Button Glow on Big Showcase */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 scale-90 group-hover:scale-100 pointer-events-none">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-black flex items-center justify-center shadow-[0_0_30px_rgba(245,158,11,0.8)] font-black">
-                  <Play className="w-7 h-7 fill-black ml-1" />
+              {/* Centered Play Button on Hover */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 ease-out z-20 scale-90 group-hover:scale-100 pointer-events-none">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-black/40 border-[4px] border-white text-white flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+                  <Play className="w-7 h-7 sm:w-8 sm:h-8 fill-white text-white ml-1" />
                 </div>
               </div>
             </div>
