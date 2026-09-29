@@ -1,4 +1,7 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../../redux/slices/authSlice';
 import { X, Home, Info, Smartphone, Mail, MapPin } from 'lucide-react';
 import { Logo } from '../common/Logo';
 import { Button } from '../common/Button';
@@ -13,7 +16,30 @@ const navItems = [
 ];
 
 export const MobileNav = ({ isOpen, onClose }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   if (!isOpen) return null;
+
+  const handleQuickSignIn = () => {
+    dispatch(
+      loginSuccess({
+        user: {
+          name: 'LionKing_77',
+          email: 'player@lionsdengaming.com',
+          vipTier: 'Gold VIP',
+          wallets: {
+            stackingWallet: 2000.00,
+            purchasingWallet: 3500.00,
+            winningWallet: 1502.36,
+          },
+        },
+        token: 'demo-access-token-12345',
+      })
+    );
+    onClose();
+    navigate('/lobby');
+  };
 
   return (
     <div className="fixed inset-0 z-50 md:hidden animate-in fade-in duration-200">
@@ -42,7 +68,7 @@ export const MobileNav = ({ isOpen, onClose }) => {
           <div className="grid grid-cols-2 gap-2.5 my-5">
             <button
               type="button"
-              onClick={onClose}
+              onClick={handleQuickSignIn}
               className="px-4 py-2 rounded-full border border-neutral-700 text-white font-black italic text-xs uppercase tracking-wider hover:border-primary hover:text-primary transition-colors"
             >
               SIGN IN
@@ -50,7 +76,7 @@ export const MobileNav = ({ isOpen, onClose }) => {
             <Button
               variant="primary"
               size="sm"
-              onClick={onClose}
+              onClick={handleQuickSignIn}
               className="w-full text-xs font-black italic uppercase tracking-wider"
             >
               JOIN NOW

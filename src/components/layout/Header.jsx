@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Menu } from 'lucide-react';
 import { Logo } from '../common/Logo';
 import { Button } from '../common/Button';
@@ -9,6 +10,7 @@ import { loginSuccess } from '../../redux/slices/authSlice';
 
 export const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [activeNav, setActiveNav] = useState('Home');
@@ -30,6 +32,7 @@ export const Header = () => {
         token: 'demo-access-token-12345',
       })
     );
+    navigate('/lobby');
   };
 
   useEffect(() => {
