@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Play } from 'lucide-react';
 import { selectSlotGames } from '../../redux/slices/gamesSlice';
+import { GameCard } from './GameCard';
 
 export const BestSlotsSection = () => {
   const slotGames = useSelector(selectSlotGames);
@@ -95,46 +96,12 @@ export const BestSlotsSection = () => {
               {previewGames.map(({ game, actualIndex }, i) => {
                 if (!game) return null;
 
-                const categoryLabel =
-                  game.category ||
-                  (game.table ? 'Table' : game.fishing ? 'Fishing' : 'Slots');
-
                 return (
-                  <div
+                  <GameCard
                     key={`${game._id || game.gameId || i}-${actualIndex}`}
+                    game={game}
                     onClick={() => handleSelectGame(actualIndex)}
-                    className="group relative rounded-2xl overflow-hidden bg-black border border-neutral-800/90 shadow-md transition-all duration-200 ease-out cursor-pointer flex flex-col justify-between"
-                  >
-                    {/* Dedicated Image Container */}
-                    <div className="relative w-full aspect-square overflow-hidden bg-black">
-                      <img
-                        src={game.image}
-                        alt={game.name}
-                        loading="lazy"
-                        onError={(e) => {
-                          e.target.src =
-                            'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80';
-                        }}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-all duration-200 ease-out"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:bg-black/45 transition-all duration-200 ease-out pointer-events-none" />
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 ease-out z-10 scale-90 group-hover:scale-100 pointer-events-none">
-                        <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/40 border-[3px] border-white text-white flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.5)]">
-                          <Play className="w-4 h-4 sm:w-5 sm:h-5 fill-white text-white ml-0.5" />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Bottom label */}
-                    <div className="relative z-10 w-full p-1.5 sm:p-2 bg-black border-t border-white/5 text-center shrink-0">
-                      <h4 className="text-white font-black text-[11px] sm:text-xs tracking-wide uppercase truncate leading-tight drop-shadow-sm">
-                        {game.name}
-                      </h4>
-                      <p className="text-primary font-bold text-[9px] sm:text-[10px] uppercase tracking-wider mt-0.5 drop-shadow-[0_0_8px_rgba(248,196,94,0.3)]">
-                        {categoryLabel}
-                      </p>
-                    </div>
-                  </div>
+                  />
                 );
               })}
             </div>

@@ -1,5 +1,5 @@
-import React from 'react';
 import { Header } from '../../components/layout/Header';
+import { AuthHeader } from '../../components/layout/AuthHeader';
 import { Footer } from '../../components/layout/Footer';
 import { HeroSection } from '../../components/gaming/HeroSection';
 import { GamesSection } from '../../components/gaming/GamesSection';
@@ -13,17 +13,19 @@ import { FaqSection } from '../../components/gaming/FaqSection';
 import { JoinPrideSection } from '../../components/gaming/JoinPrideSection';
 import { ThemeDecorations } from '../../components/gaming/ThemeDecorations';
 import { useTheme } from '../../theme/ThemeProvider';
+import { useSelector } from 'react-redux';
 
 export const HomePage = () => {
   const { theme } = useTheme();
+  const { isAuthenticated } = useSelector((state) => state.auth) || {};
 
   return (
     <div className="min-h-screen bg-background text-text flex flex-col relative selection:bg-primary selection:text-slate-950 font-sans">
       {/* Seasonal Ambient Theme Atmosphere (Snow, Bats, Autumn Leaves, Golden Stars) */}
       {/* <ThemeDecorations /> */}
 
-      {/* Sticky Top Header */}
-      <Header />
+      {/* Sticky Top Header (Authenticated or Guest Header) */}
+      {isAuthenticated ? <AuthHeader /> : <Header />}
 
       {/* Main Content Area */}
       <main className="flex-1 w-full">

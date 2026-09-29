@@ -4,12 +4,33 @@ import { Logo } from '../common/Logo';
 import { Button } from '../common/Button';
 import { MobileNav } from './MobileNav';
 import { useTheme } from '../../theme/ThemeProvider';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../../redux/slices/authSlice';
 
 export const Header = () => {
+  const dispatch = useDispatch();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [activeNav, setActiveNav] = useState('Home');
-const { theme } = useTheme();
+  const { theme } = useTheme();
+
+  const handleQuickSignIn = () => {
+    dispatch(
+      loginSuccess({
+        user: {
+          name: 'LionKing_77',
+          email: 'player@lionsdengaming.com',
+          vipTier: 'Gold VIP',
+          wallets: {
+            stackingWallet: 2000.00,
+            purchasingWallet: 3500.00,
+            winningWallet: 1502.36,
+          },
+        },
+        token: 'demo-access-token-12345',
+      })
+    );
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,7 +51,7 @@ const { theme } = useTheme();
   return (
     <>
       <header
-        className={`sticky top-0 z-40 w-full transition-all duration-300 bg-black ${
+        className={`sticky top-0 z-50 w-full transition-all duration-300 bg-black ${
           isScrolled
             ? 'bg-black/95 backdrop-blur-md shadow-2xl shadow-black/80 border-b border-white/10 py-3'
             : 'bg-black border-b border-neutral-900 py-4'
@@ -70,6 +91,7 @@ const { theme } = useTheme();
             {/* SIGN IN Text Button */}
             <button
               type="button"
+              onClick={handleQuickSignIn}
               className="text-sm lg:text-base font-black italic tracking-wider uppercase text-white hover:text-primary transition-colors px-2 py-1 select-none cursor-pointer"
             >
               SIGN IN
@@ -79,6 +101,7 @@ const { theme } = useTheme();
             <Button
               variant="primary"
               size="md"
+              onClick={handleQuickSignIn}
               className="text-xs sm:text-sm font-black italic tracking-wider"
             >
               JOIN NOW

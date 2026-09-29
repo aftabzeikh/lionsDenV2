@@ -1,79 +1,92 @@
-import React, { useState, useEffect } from 'react';
-import { Trophy, Sparkles, TrendingUp, Flame } from 'lucide-react';
-import { useTheme } from '../../theme/ThemeProvider';
+import React from 'react';
 
-export const JackpotTicker = ({ className = '' }) => {
-  const { themeName } = useTheme();
-  // Live ticking jackpot amount starting from a realistic high value
-  const [jackpot, setJackpot] = useState(2845920.45);
-  const [lastWinner, setLastWinner] = useState({
-    user: 'Alex_Vip',
-    amount: '$45,820.00',
-    game: 'Gates of Olympus',
-  });
+// Jackpot & Coins Assets
+import jackpotBg from '../../assets/images/jackpot/jackpot-bg.png';
+import jackpotImg from '../../assets/images/jackpot/jackpot-img.svg';
+import bronzeCoin from '../../assets/images/coins/bronze.svg';
+import silverCoin from '../../assets/images/coins/silver.svg';
+import goldCoin from '../../assets/images/coins/gold.svg';
 
-  useEffect(() => {
-    // Increment jackpot organically every 1.5 seconds
-    const interval = setInterval(() => {
-      setJackpot((prev) => prev + (Math.random() * 2.8 + 0.5));
-    }, 1500);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const formattedJackpot = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-  }).format(jackpot);
-
+export const JackpotTicker = ({
+  bronzeAmount = 20,
+  silverAmount = 500,
+  goldAmount = 5000,
+  className = '',
+}) => {
   return (
     <div
-      className={`relative overflow-hidden rounded-2xl bg-gradient-to-r from-amber-500/15 via-purple-950/40 to-amber-500/15 border border-primary/40 backdrop-blur-xl p-4 sm:p-5 shadow-2xl shadow-primary/10 group ${className}`}
+      className={`relative w-full overflow-hidden rounded-sm sm:rounded-md border-2 border-primary select-none group ${className}`}
     >
-      {/* Background Animated Glow */}
-      <div className="absolute -top-10 -right-10 w-36 h-36 bg-primary/20 rounded-full blur-2xl group-hover:bg-primary/30 transition-all pointer-events-none" />
-      <div className="absolute -bottom-10 -left-10 w-36 h-36 bg-accent/20 rounded-full blur-2xl pointer-events-none" />
+      {/* Edge-to-edge Background Image (Scaled slightly to trim PNG padding and fully cover 100%) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <img
+          src={jackpotBg}
+          alt="Jackpot Background"
+          className="w-full h-full object-cover object-center scale-[1.08] brightness-105"
+        />
+        {/* Subtle Ambient Depth Tint */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
+      </div>
 
-      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4">
-        {/* Jackpot Header & Value */}
-        <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 via-primary to-yellow-600 flex items-center justify-center text-slate-950 shadow-lg shadow-primary/30 shrink-0 animate-bounce">
-            <Trophy className="w-6 h-6" />
-          </div>
+      {/* Subtle Golden Sheen Glow on hover */}
+      <div className="absolute -inset-full bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
 
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-[11px] font-black tracking-widest text-primary uppercase flex items-center gap-1">
-                <Flame className="w-3.5 h-3.5 fill-primary text-primary" />
-                MEGA JACKPOT POOL
-              </span>
-              <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-red-500/20 text-red-400 border border-red-500/30 animate-pulse">
-                LIVE
-              </span>
-            </div>
-            {/* Pulsing Jackpot Number */}
-            <div className="text-2xl sm:text-3xl md:text-4xl font-black font-display tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-500 drop-shadow-[0_2px_12px_rgba(234,179,8,0.5)]">
-              {formattedJackpot}
-            </div>
-          </div>
+      {/* Main Banner Content Row - Always Single Row (flex-nowrap) */}
+      <div className="relative z-10 px-3 sm:px-6 md:px-10 lg:px-12 py-2.5 sm:py-3.5 md:py-5 flex flex-nowrap items-center justify-between gap-2 sm:gap-6 overflow-hidden">
+        
+        {/* Left: JACKPOT Logo Artwork */}
+        <div className="flex items-center shrink-0">
+          <img
+            src={jackpotImg}
+            alt="JACKPOT"
+            className="h-6 sm:h-9 md:h-12 lg:h-16 w-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] transform group-hover:scale-105 transition-transform duration-300 shrink-0"
+          />
         </div>
 
-        {/* Live Recent Winner Capsule */}
-        <div className="flex items-center gap-3 bg-surface/80 border border-border/80 rounded-xl px-3.5 py-2 text-xs backdrop-blur-md">
-          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-ping shrink-0" />
-          <div>
-            <div className="text-muted text-[10px] uppercase font-bold tracking-wider">
-              Recent Big Win
-            </div>
-            <div className="font-semibold text-text">
-              <span className="text-primary font-bold">{lastWinner.user}</span> won{' '}
-              <span className="text-emerald-400 font-extrabold">{lastWinner.amount}</span> on{' '}
-              <span className="text-text/80">{lastWinner.game}</span>
-            </div>
+        {/* Jackpot Coin Tiers Container (Single line) */}
+        <div className="flex items-center justify-end sm:justify-around flex-1 gap-2.5 sm:gap-5 md:gap-8 lg:gap-14 max-w-3xl shrink-0">
+          
+          {/* Tier 1: Bronze Coin + 20 */}
+          <div className="flex items-center gap-1 sm:gap-2.5 md:gap-3 group/tier shrink-0">
+            <img
+              src={bronzeCoin}
+              alt="Bronze Tier Coin"
+              className="w-5 h-5 sm:w-8 sm:h-8 md:w-11 md:h-11 lg:w-14 lg:h-14 object-contain shrink-0 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] group-hover/tier:scale-110 transition-transform duration-200"
+            />
+            <span className="text-xs sm:text-xl md:text-2xl lg:text-4xl font-black italic tracking-tight sm:tracking-wide text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] font-sans">
+              {bronzeAmount}
+            </span>
           </div>
+
+          {/* Tier 2: Silver Coin + 500 */}
+          <div className="flex items-center gap-1 sm:gap-2.5 md:gap-3 group/tier shrink-0">
+            <img
+              src={silverCoin}
+              alt="Silver Tier Coin"
+              className="w-5 h-5 sm:w-8 sm:h-8 md:w-11 md:h-11 lg:w-14 lg:h-14 object-contain shrink-0 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] group-hover/tier:scale-110 transition-transform duration-200"
+            />
+            <span className="text-xs sm:text-xl md:text-2xl lg:text-4xl font-black italic tracking-tight sm:tracking-wide text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] font-sans">
+              {silverAmount}
+            </span>
+          </div>
+
+          {/* Tier 3: Gold Coin + 5000 */}
+          <div className="flex items-center gap-1 sm:gap-2.5 md:gap-3 group/tier shrink-0">
+            <img
+              src={goldCoin}
+              alt="Gold Tier Coin"
+              className="w-5 h-5 sm:w-8 sm:h-8 md:w-11 md:h-11 lg:w-14 lg:h-14 object-contain shrink-0 drop-shadow-[0_4px_12px_rgba(248,196,94,0.4)] group-hover/tier:scale-110 transition-transform duration-200"
+            />
+            <span className="text-xs sm:text-xl md:text-2xl lg:text-4xl font-black italic tracking-tight sm:tracking-wide text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] font-sans">
+              {goldAmount}
+            </span>
+          </div>
+
         </div>
+
       </div>
     </div>
   );
 };
+
+export const JackpotBanner = JackpotTicker;

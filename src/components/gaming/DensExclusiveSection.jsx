@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Play } from 'lucide-react';
 import { selectPopularGames } from '../../redux/slices/gamesSlice';
+import { GameCard } from './GameCard';
 import exclusiveIcon from '../../assets/images/exclusive-icon.svg';
 
 export const DensExclusiveSection = () => {
@@ -113,50 +114,16 @@ export const DensExclusiveSection = () => {
 
           {/* Right Column: 8 Games Grid (2 Rows x 4 Columns) */}
           <div className="lg:col-span-8 xl:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-3.5 sm:gap-4">
-            {gridGames.map(({ game, index }) => {
-              const displayName = game.subName || game.name || 'BLACK JACK';
-              const displayCategory = game.category || 'Slots';
-
-              return (
-                <div
-                  key={game.id || game._id || `pop-grid-${index}`}
-                  onClick={() => handleSelectGame(index)}
-                  className={`group relative rounded-2xl overflow-hidden bg-black border border-neutral-800/90 shadow-md transition-all duration-200 ease-out cursor-pointer flex flex-col justify-between ${
-                    isAnimating ? 'opacity-60 scale-[0.98]' : 'opacity-100 scale-100'
-                  }`}
-                >
-                  {/* Dedicated Image Container */}
-                  <div className="relative w-full aspect-square overflow-hidden bg-black">
-                    <img
-                      src={game.image}
-                      alt={game.name}
-                      loading="lazy"
-                      onError={(e) => {
-                        e.target.src =
-                          'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=400&q=80';
-                      }}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-all duration-200 ease-out"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:bg-black/45 transition-all duration-200 ease-out pointer-events-none" />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 ease-out z-10 scale-90 group-hover:scale-100 pointer-events-none">
-                      <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/40 border-[3px] border-white text-white flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.5)]">
-                        <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-white text-white ml-0.5" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Bottom Info Bar */}
-                  <div className="relative z-10 w-full p-2 sm:p-2.5 bg-black border-t border-white/5 text-center shrink-0">
-                    <h4 className="text-white font-black text-xs sm:text-[13px] tracking-wide uppercase truncate leading-tight drop-shadow-sm">
-                      {displayName}
-                    </h4>
-                    <p className="text-primary font-bold text-[10px] sm:text-[11px] uppercase tracking-wider mt-0.5 drop-shadow-[0_0_8px_rgba(248,196,94,0.3)]">
-                      {displayCategory}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+            {gridGames.map(({ game, index }) => (
+              <GameCard
+                key={game.id || game._id || `pop-grid-${index}`}
+                game={game}
+                title={game.subName || game.name}
+                category={game.category || 'Slots'}
+                onClick={() => handleSelectGame(index)}
+                className={isAnimating ? 'opacity-60 scale-[0.98]' : 'opacity-100 scale-100'}
+              />
+            ))}
           </div>
 
         </div>

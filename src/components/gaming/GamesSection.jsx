@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Search, ChevronDown, ChevronLeft, ChevronRight, Check, Sparkles, RefreshCw, X, Play } from 'lucide-react';
+import { Search, ChevronDown, ChevronLeft, ChevronRight, Check, Sparkles, RefreshCw, X } from 'lucide-react';
 import {
   fetchGamesData,
   selectAllGames,
@@ -8,6 +8,7 @@ import {
   selectGamesLoading,
   selectGamesError,
 } from '../../redux/slices/gamesSlice';
+import { GameCard } from './GameCard';
 import { TopPickSection } from './TopPickSection';
 import { BestSlotsSection } from './BestSlotsSection';
 import { HotTodaySection } from './HotTodaySection';
@@ -34,7 +35,7 @@ const CATEGORIES = [
   { id: 'table', name: 'Craps', filterKey: 'table' },
 ];
 
-export const GamesSection = () => {
+export const GamesSection = ({authenticated}) => {
   const dispatch = useDispatch();
   const games = useSelector(selectAllGames);
   const providers = useSelector(selectProviders);
@@ -229,12 +230,12 @@ export const GamesSection = () => {
   }, [selectedCategory]);
 
   return (
-    <section className="relative w-full py-10 sm:py-14 bg-[#181818] text-white overflow-hidden select-none italic">
+    <section id="games-section" className="relative w-full py-8 sm:py-12 bg-[#181818] text-white overflow-hidden select-none italic rounded-2xl sm:rounded-3xl border border-neutral-800/80">
       {/* Background ambient lighting */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-primary/5 rounded-full blur-[140px] pointer-events-none" />
 
       {/* Centered Controls & Header Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="w-full px-2 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <p className="text-primary font-extrabold italic uppercase tracking-widest text-xs sm:text-sm mb-2 drop-shadow-sm">
@@ -453,46 +454,13 @@ export const GamesSection = () => {
         /* EXPANDED GRID VIEW (Show All Mode - Contained with empty space on left/right) */
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5 sm:gap-4.5">
-            {filteredGames.map((game) => {
-              const categoryLabel = getGameCategoryLabel(game);
-
-              return (
-                  <div
-                    key={game._id || game.gameId}
-                    className="group relative rounded-2xl overflow-hidden bg-black border border-neutral-800/90 shadow-md transition-all duration-200 ease-out cursor-pointer flex flex-col justify-between"
-                  >
-                    {/* Dedicated Image Container */}
-                    <div className="relative w-full aspect-square overflow-hidden bg-black">
-                      <img
-                        src={game.image}
-                        alt={game.name}
-                        loading="lazy"
-                        onError={(e) => {
-                          e.target.src =
-                            'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80';
-                        }}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-all duration-200 ease-out"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:bg-black/45 transition-all duration-200 ease-out pointer-events-none" />
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 ease-out z-10 scale-90 group-hover:scale-100 pointer-events-none">
-                        <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/40 border-[3px] border-white text-white flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.5)]">
-                          <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-white text-white ml-0.5" />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Bottom Info Bar */}
-                    <div className="relative z-10 w-full p-2 sm:p-2.5 bg-black border-t border-white/5 text-center shrink-0">
-                      <h4 className="text-white font-black text-xs sm:text-[13px] tracking-wide uppercase truncate leading-tight drop-shadow-sm">
-                        {game.name}
-                      </h4>
-                      <p className="text-primary font-bold text-[10px] sm:text-[11px] uppercase tracking-wider mt-0.5 drop-shadow-[0_0_8px_rgba(248,196,94,0.3)]">
-                        {categoryLabel}
-                      </p>
-                    </div>
-                  </div>
-              );
-            })}
+            {filteredGames.map((game) => (
+              <GameCard
+                key={game._id || game.gameId}
+                game={game}
+                category={getGameCategoryLabel(game)}
+              />
+            ))}
           </div>
         </div>
       ) : (
@@ -530,52 +498,52 @@ export const GamesSection = () => {
             className="w-full overflow-x-auto no-scrollbar scroll-smooth px-4 sm:px-6 lg:px-8 py-2"
           >
             <div className="grid grid-rows-2 grid-flow-col auto-cols-[145px] sm:auto-cols-[175px] md:auto-cols-[190px] lg:auto-cols-[205px] gap-3.5 sm:gap-4.5 w-max">
-              {filteredGames.map((game) => {
-                const categoryLabel = getGameCategoryLabel(game);
-
-                return (
-                  <div
-                    key={game._id || game.gameId}
-                    className="group relative rounded-2xl overflow-hidden bg-black border border-neutral-800/90 shadow-md transition-all duration-200 ease-out cursor-pointer flex flex-col justify-between shrink-0"
-                  >
-                    {/* Dedicated Image Container */}
-                    <div className="relative w-full aspect-square overflow-hidden bg-black">
-                      <img
-                        src={game.image}
-                        alt={game.name}
-                        loading="lazy"
-                        onError={(e) => {
-                          e.target.src =
-                            'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80';
-                        }}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-all duration-200 ease-out"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:bg-black/45 transition-all duration-200 ease-out pointer-events-none" />
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 ease-out z-10 scale-90 group-hover:scale-100 pointer-events-none">
-                        <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/40 border-[3px] border-white text-white flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.5)]">
-                          <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-white text-white ml-0.5" />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Bottom Info Bar */}
-                    <div className="relative z-10 w-full p-2 sm:p-2.5 bg-black border-t border-white/5 text-center shrink-0">
-                      <h4 className="text-white font-black text-xs sm:text-[13px] tracking-wide uppercase truncate leading-tight drop-shadow-sm">
-                        {game.name}
-                      </h4>
-                      <p className="text-primary font-bold text-[10px] sm:text-[11px] uppercase tracking-wider mt-0.5 drop-shadow-[0_0_8px_rgba(248,196,94,0.3)]">
-                        {categoryLabel}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
+              {filteredGames.map((game) => (
+                <GameCard
+                  key={game._id || game.gameId}
+                  game={game}
+                  category={getGameCategoryLabel(game)}
+                  className="shrink-0"
+                />
+              ))}
             </div>
           </div>
         </div>
       )}
+{authenticated ? <>
+{/* Top Pick Games Slider Section */}
+      <TopPickSection />
 
-      {/* Top Pick Games Slider Section */}
+
+      {/* Hot Today Category Games Slider Section */}
+      <HotTodaySection />
+      
+      {/* Live Table Games Slider Section */}
+      <LiveTableSection />
+
+      {/* Den's Classic Jackpot Games Section */}
+      <JackpotGamesSection />
+
+      {/* Den's Exclusive Popular Games Showcase Section */}
+      <DensExclusiveSection />
+
+      {/* Best Slot Games Showcase Section */}
+      <BestSlotsSection />
+
+      {/* Game Providers Marquee Slider Section */}
+      <GameProvidersSection />
+
+
+      {/* Unleash Your Gaming Experience Feature Section */}
+      <UnleashExperienceSection />
+
+
+      {/* Next Level Releases New Games Section */}
+      <NewGamesSection />
+
+</> :<>
+
+{/* Top Pick Games Slider Section */}
       <TopPickSection />
 
       {/* Best Slot Games Showcase Section */}
@@ -601,6 +569,8 @@ export const GamesSection = () => {
 
       {/* Next Level Releases New Games Section */}
       <NewGamesSection />
+</>}
+      
     </section>
   );
 };

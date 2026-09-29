@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { Play, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { selectLiveTableGames } from '../../redux/slices/gamesSlice';
-import tableIcon from "../../assets/images/table-icon.svg"
+import { GameCard } from './GameCard';
+import tableIcon from "../../assets/images/table-icon.svg";
 
 
 export const LiveTableSection = ({ games: propGames }) => {
@@ -143,49 +144,17 @@ export const LiveTableSection = ({ games: propGames }) => {
           {/* Big slide size: exactly 3.5 cards visible on screen */}
           <div className="flex items-center gap-5 sm:gap-6 md:gap-7 w-max pl-2 pr-12">
             {repeatedSets.flatMap((setIndex) =>
-              liveGames.map((game, index) => {
-                const categoryName = game.category || 'Live Table';
-
-                return (
-                  <div
-                    key={`live-set-${setIndex}-${game.id || game._id || `live-${index}`}`}
-                    className="relative flex items-center group cursor-pointer shrink-0"
-                  >
-                    {/* Big Game Card Container (3.5 slides on screen) */}
-                    <div className="relative z-10 w-[290px] sm:w-[350px] md:w-[390px] lg:w-[430px] xl:w-[460px] rounded-3xl overflow-hidden bg-black border border-neutral-800/90 shadow-xl transition-all duration-200 ease-out cursor-pointer flex flex-col justify-between">
-                      {/* Dedicated Image Container */}
-                      <div className="relative w-full aspect-[16/11] sm:aspect-[16/11] overflow-hidden bg-black">
-                        <img
-                          src={game.image}
-                          alt={game.name}
-                          loading="lazy"
-                          onError={(e) => {
-                            e.target.src =
-                              'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=600&q=80';
-                          }}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-all duration-200 ease-out"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:bg-black/45 transition-all duration-200 ease-out pointer-events-none" />
-                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 ease-out z-20 scale-90 group-hover:scale-100 pointer-events-none">
-                          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-black/40 border-[3.5px] border-white text-white flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.5)]">
-                            <Play className="w-6 h-6 sm:w-7 sm:h-7 fill-white text-white ml-1" />
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Bottom Info Bar: Game Title + Yellow Category */}
-                      <div className="relative z-10 w-full p-2.5 sm:p-3.5 bg-black border-t border-white/5 text-center shrink-0">
-                        <h4 className="text-white font-black text-sm sm:text-base md:text-lg tracking-wide uppercase truncate leading-tight drop-shadow-sm">
-                          {game.name}
-                        </h4>
-                        <p className="text-primary font-bold text-xs sm:text-[13px] uppercase tracking-wider mt-1 drop-shadow-[0_0_8px_rgba(248,196,94,0.3)]">
-                          {categoryName}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })
+              liveGames.map((game, index) => (
+                <GameCard
+                  key={`live-set-${setIndex}-${game.id || game._id || `live-${index}`}`}
+                  game={game}
+                  variant="stacked"
+                  imageAspectRatio="aspect-square"
+                  size="lg"
+                  playButtonTheme="gold"
+                  className="w-[220px] sm:w-[260px] md:w-[300px] lg:w-[340px] xl:w-[370px] !rounded-3xl border-neutral-800/90 hover:border-amber-400 shadow-xl hover:shadow-[0_14px_40px_rgba(245,158,11,0.25)] shrink-0"
+                />
+              ))
             )}
           </div>
         </div>

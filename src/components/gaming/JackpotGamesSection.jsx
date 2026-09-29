@@ -1,10 +1,8 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { Play, ChevronLeft, ChevronRight } from 'lucide-react';
 import { selectJackpotGames } from '../../redux/slices/gamesSlice';
+import { GameCard } from './GameCard';
 import jackpotIcon from '../../assets/images/classic-icon.svg';
-
-
 
 export const JackpotGamesSection = ({ games: propGames }) => {
   const reduxJackpots = useSelector(selectJackpotGames);
@@ -60,19 +58,6 @@ export const JackpotGamesSection = ({ games: propGames }) => {
     }
   }, [getSingleSetWidth, jackpotGames.length, isExpanded]);
 
-  // Scroll handlers for Left and Right buttons
-  const handleScrollLeft = () => {
-    if (sliderRef.current) {
-      sliderRef.current.scrollBy({ left: -320, behavior: 'smooth' });
-    }
-  };
-
-  const handleScrollRight = () => {
-    if (sliderRef.current) {
-      sliderRef.current.scrollBy({ left: 320, behavior: 'smooth' });
-    }
-  };
-
   // Continuous auto-slide interval (pauses on hover)
   useEffect(() => {
     if (isPaused || jackpotGames.length === 0 || isExpanded) return;
@@ -123,45 +108,15 @@ export const JackpotGamesSection = ({ games: propGames }) => {
       {isExpanded ? (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5 sm:gap-4.5">
-            {jackpotGames.map((game, idx) => {
-              const categoryName =
-                game.category ||
-                (game.fishing ? 'Fishing' : game.table ? 'Table' : game.liveTable ? 'Live Table' : 'Slots');
-
-              return (
-                <div
-                  key={`jackpot-grid-${game.id || game._id || idx}`}
-                  className="group relative aspect-[4/5] rounded-2xl overflow-hidden bg-black border border-neutral-800/90 hover:border-amber-400 shadow-md hover:shadow-[0_8px_25px_rgba(245,158,11,0.2)] transition-all duration-300 cursor-pointer flex flex-col justify-end"
-                >
-                  <img
-                    src={game.image}
-                    alt={game.name}
-                    loading="lazy"
-                    onError={(e) => {
-                      e.target.src =
-                        'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80';
-                    }}
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80 group-hover:opacity-70 transition-opacity duration-300" />
-                  
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 scale-90 group-hover:scale-100 pointer-events-none">
-                    <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-black flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.7)] font-black">
-                      <Play className="w-4 h-4 sm:w-5 sm:h-5 fill-black ml-0.5" />
-                    </div>
-                  </div>
-
-                  <div className="relative z-20 w-full p-2.5 sm:p-3 bg-black/90 backdrop-blur-md border-t border-white/5 text-center">
-                    <h4 className="text-white font-black text-xs sm:text-[13px] tracking-wide uppercase truncate leading-tight drop-shadow-sm">
-                      {game.name}
-                    </h4>
-                    <p className="text-amber-400 font-bold text-[10px] sm:text-[11px] uppercase tracking-wider mt-0.5 drop-shadow-[0_0_8px_rgba(245,158,11,0.3)]">
-                      {categoryName}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+            {jackpotGames.map((game, idx) => (
+              <GameCard
+                key={`jackpot-grid-${game.id || game._id || idx}`}
+                game={game}
+                variant="overlay"
+                playButtonTheme="gold"
+                className="aspect-[4/5] hover:border-amber-400 hover:shadow-[0_8px_25px_rgba(245,158,11,0.2)]"
+              />
+            ))}
           </div>
         </div>
       ) : (
@@ -173,26 +128,6 @@ export const JackpotGamesSection = ({ games: propGames }) => {
           onTouchStart={() => setIsPaused(true)}
           onTouchEnd={() => setIsPaused(false)}
         >
-          {/* Left Scroll Button */}
-          {/* <button
-            type="button"
-            onClick={handleScrollLeft}
-            aria-label="Scroll Left"
-            className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-amber-400 hover:bg-amber-300 active:scale-95 text-black flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,0.5)] transition-all duration-200 cursor-pointer opacity-90 group-hover/jackpotslider:opacity-100 hover:scale-110"
-          >
-            <ChevronLeft className="w-5 h-5 stroke-[3]" />
-          </button> */}
-
-          {/* Right Scroll Button */}
-          {/* <button
-            type="button"
-            onClick={handleScrollRight}
-            aria-label="Scroll Right"
-            className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-amber-400 hover:bg-amber-300 active:scale-95 text-black flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,0.5)] transition-all duration-200 cursor-pointer opacity-90 group-hover/jackpotslider:opacity-100 hover:scale-110"
-          >
-            <ChevronRight className="w-5 h-5 stroke-[3]" />
-          </button> */}
-
           {/* Horizontal Scrollable Slider Track */}
           <div
             ref={sliderRef}
@@ -201,51 +136,13 @@ export const JackpotGamesSection = ({ games: propGames }) => {
           >
             <div className="flex items-center gap-4 sm:gap-5 md:gap-6 w-max pl-2 pr-12">
               {repeatedSets.flatMap((setIndex) =>
-                jackpotGames.map((game, index) => {
-                  const categoryName =
-                    game.category ||
-                    (game.fishing ? 'Fishing' : game.table ? 'Table' : game.liveTable ? 'Live Table' : 'Slots');
-
-                  return (
-                    <div
-                      key={`jackpot-set-${setIndex}-${game.id || game._id || `jackpot-${index}`}`}
-                      className="relative flex items-center group cursor-pointer shrink-0"
-                    >
-                      {/* Game Card Container */}
-                      <div className="relative z-10 w-[150px] sm:w-[175px] md:w-[195px] rounded-2xl overflow-hidden bg-black border border-neutral-800/90 shadow-md transition-all duration-200 ease-out cursor-pointer flex flex-col justify-between">
-                        {/* Dedicated Image Container */}
-                        <div className="relative w-full aspect-square overflow-hidden bg-black">
-                          <img
-                            src={game.image}
-                            alt={game.name}
-                            loading="lazy"
-                            onError={(e) => {
-                              e.target.src =
-                                'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80';
-                            }}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-all duration-200 ease-out"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:bg-black/45 transition-all duration-200 ease-out pointer-events-none" />
-                          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 ease-out z-10 scale-90 group-hover:scale-100 pointer-events-none">
-                            <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/40 border-[3px] border-white text-white flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.5)]">
-                              <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-white text-white ml-0.5" />
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Bottom Info Bar: Game Title + Yellow Category */}
-                        <div className="relative z-10 w-full p-2 sm:p-2.5 bg-black border-t border-white/5 text-center shrink-0">
-                          <h4 className="text-white font-black text-xs sm:text-[13px] tracking-wide uppercase truncate leading-tight drop-shadow-sm">
-                            {game.name}
-                          </h4>
-                          <p className="text-primary font-bold text-[10px] sm:text-[11px] uppercase tracking-wider mt-0.5 drop-shadow-[0_0_8px_rgba(248,196,94,0.3)]">
-                            {categoryName}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })
+                jackpotGames.map((game, index) => (
+                  <GameCard
+                    key={`jackpot-set-${setIndex}-${game.id || game._id || `jackpot-${index}`}`}
+                    game={game}
+                    className="w-[150px] sm:w-[175px] md:w-[195px] shrink-0"
+                  />
+                ))
               )}
             </div>
           </div>
@@ -254,3 +151,4 @@ export const JackpotGamesSection = ({ games: propGames }) => {
     </div>
   );
 };
+

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './theme/ThemeProvider';
 import { HomePage } from './pages/home/HomePage';
+import { LobbyPage } from './pages/lobby/LobbyPage';
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          {/* Future routes will plug in here effortlessly */}
+          <Route path="/lobby" element={<LobbyPage />} />
+          <Route path="/games" element={<LobbyPage />} />
           <Route path="*" element={<HomePage />} />
         </Routes>
       </BrowserRouter>
