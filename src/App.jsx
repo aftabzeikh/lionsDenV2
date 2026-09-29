@@ -9,8 +9,9 @@ function App() {
     <ThemeProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/lobby" element={<LobbyPage />} />
+          {/* <Route path="/" element={<HomePage />} /> */}
+          <Route path="/" element={<LobbyPage />} />
+          {/* <Route path="/lobby" element={<LobbyPage />} /> */}
           {/* <Route path="/games" element={<LobbyPage />} /> */}
           <Route path="*" element={<HomePage />} />
         </Routes>
