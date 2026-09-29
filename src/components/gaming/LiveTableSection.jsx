@@ -120,7 +120,7 @@ export const LiveTableSection = ({ games: propGames }) => {
           type="button"
           onClick={handleScrollLeft}
           aria-label="Scroll Left"
-          className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-amber-400 hover:bg-amber-300 active:scale-95 text-black flex items-center justify-center shadow-[0_0_18px_rgba(245,158,11,0.55)] transition-all duration-200 cursor-pointer opacity-90 group-hover/liveslider:opacity-100 hover:scale-110"
+          className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-amber-400 hover:bg-amber-300 active:scale-95 text-black flex items-center justify-center shadow-[0_0_18px_rgba(245,158,11,0.55)] transition-all duration-200 cursor-pointer opacity-90 group-hover/liveslider:opacity-100 hover:scale-110"
         >
           <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 stroke-[3]" />
         </button>
@@ -130,7 +130,7 @@ export const LiveTableSection = ({ games: propGames }) => {
           type="button"
           onClick={handleScrollRight}
           aria-label="Scroll Right"
-          className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-amber-400 hover:bg-amber-300 active:scale-95 text-black flex items-center justify-center shadow-[0_0_18px_rgba(245,158,11,0.55)] transition-all duration-200 cursor-pointer opacity-90 group-hover/liveslider:opacity-100 hover:scale-110"
+          className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-amber-400 hover:bg-amber-300 active:scale-95 text-black flex items-center justify-center shadow-[0_0_18px_rgba(245,158,11,0.55)] transition-all duration-200 cursor-pointer opacity-90 group-hover/liveslider:opacity-100 hover:scale-110"
         >
           <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[3]" />
         </button>

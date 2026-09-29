@@ -36,9 +36,9 @@ export const Footer = () => {
   ];
 
   return (
-    <footer className="w-full bg-[#121212] text-white border-t border-neutral-800/80 font-sans select-none">
+    <footer className="w-full bg-[#181818] text-white border-t border-neutral-800/80 font-sans select-none">
       {/* Veteran Owned & Operated Continuous Auto-Slide Marquee Banner */}
-      <div className="w-full bg-[#1e1e1e] border-b border-neutral-800/80 py-3 overflow-hidden relative">
+      <div className="w-full bg-[#262626] border-b border-neutral-800/80 py-3 overflow-hidden relative">
         <div className="animate-marquee flex items-center whitespace-nowrap">
           {[...Array(4)].map((_, i) => (
             <div key={i} className="flex items-center gap-3 px-8 shrink-0">
@@ -197,7 +197,7 @@ export const Footer = () => {
       </div>
 
       {/* Bottom Copyright Bar */}
-      <div className="w-full bg-[#0a0a0a] py-4 border-t border-neutral-900 px-4 text-center">
+      <div className="w-full bg-[#262626] py-4 border-t border-neutral-900 px-4 text-center">
         <p className="text-neutral-400 text-xs sm:text-sm italic">
           © {currentYear} Lions Den Games. Licensed by JK Digitals. All rights reserved.
         </p>

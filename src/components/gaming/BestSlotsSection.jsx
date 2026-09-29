@@ -4,7 +4,7 @@ import { Play } from 'lucide-react';
 import { selectSlotGames } from '../../redux/slices/gamesSlice';
 import { GameCard } from './GameCard';
 
-export const BestSlotsSection = () => {
+export const BestSlotsSection = ({ authenticated = false }) => {
   const slotGames = useSelector(selectSlotGames);
   const gamesList = slotGames || [];
 
@@ -64,7 +64,7 @@ export const BestSlotsSection = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
-          
+
           {/* Left Column: Heading, Description & 3 Distinct Slot Cards */}
           <div className="lg:col-span-6 flex flex-col justify-between space-y-6">
             <div className="space-y-4">
@@ -73,7 +73,7 @@ export const BestSlotsSection = () => {
                 <p className="text-amber-400 font-extrabold italic uppercase tracking-widest text-xs sm:text-sm mb-1.5 drop-shadow-sm">
                   BEST SLOT GAMES
                 </p>
-                
+
                 {/* Main Display Headline */}
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-black italic tracking-wide text-white uppercase leading-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
                   UNLEASH YOUR INNER KING
@@ -114,14 +114,13 @@ export const BestSlotsSection = () => {
             onMouseLeave={() => setIsPaused(false)}
           >
             <div className="relative w-full h-full min-h-[380px] sm:min-h-[460px] lg:min-h-[500px] rounded-3xl sm:rounded-[32px] overflow-hidden bg-neutral-900 border border-neutral-800/90 shadow-2xl group cursor-pointer transition-all duration-200 ease-out">
-              
+
               {/* Main Showcase Game Image with Animated Transition */}
               <div
-                className={`w-full h-full relative transition-all duration-500 ease-out ${
-                  isAnimating
+                className={`w-full h-full relative transition-all duration-500 ease-out ${isAnimating
                     ? 'opacity-0 scale-95 blur-sm'
                     : 'opacity-100 scale-100 blur-0'
-                }`}
+                  }`}
               >
                 <img
                   src={activeGame?.image}
@@ -150,17 +149,18 @@ export const BestSlotsSection = () => {
         </div>
 
         {/* Bottom Center: JOIN NOW Golden Button */}
-        <div className="flex justify-center mt-12 sm:mt-14">
-          <button
-            type="button"
-            className="group relative inline-flex items-center justify-center px-10 sm:px-12 py-3.5 sm:py-4 rounded-full font-black italic uppercase tracking-widest text-sm sm:text-base text-slate-950 transition-all duration-300 cursor-pointer shadow-[0_0_25px_rgba(248,196,94,0.4)] hover:shadow-[0_0_35px_rgba(248,196,94,0.7)] hover:scale-105 active:scale-95"
-            style={{
-              background: 'linear-gradient(95.84deg, #B77E15 4.79%, #F8C45E 51.55%, #B77E15 101.36%)',
-            }}
-          >
-            <span>JOIN NOW</span>
-          </button>
-        </div>
+        {!authenticated && (<>
+          <div className="flex justify-center mt-12 sm:mt-14">
+            <button
+              type="button"
+              className="group relative inline-flex items-center justify-center px-10 sm:px-12 py-3.5 sm:py-4 rounded-full font-black italic uppercase tracking-widest text-sm sm:text-base text-slate-950 transition-all duration-300 cursor-pointer shadow-[0_0_25px_rgba(248,196,94,0.4)] hover:shadow-[0_0_35px_rgba(248,196,94,0.7)] hover:scale-105 active:scale-95"
+              style={{
+                background: 'linear-gradient(95.84deg, #B77E15 4.79%, #F8C45E 51.55%, #B77E15 101.36%)',
+              }}
+            >
+              <span>JOIN NOW</span>
+            </button>
+          </div></>)}
       </div>
     </section>
   );

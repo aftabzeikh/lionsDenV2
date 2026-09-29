@@ -230,7 +230,7 @@ export const GamesSection = ({authenticated}) => {
   }, [selectedCategory]);
 
   return (
-    <section id="games-section" className="relative w-full py-8 sm:py-12 bg-[#181818] text-white overflow-hidden select-none italic rounded-2xl sm:rounded-3xl border border-neutral-800/80">
+    <section id="games-section" className={`relative w-full py-0 sm:py-0 text-white overflow-hidden select-none italic sm:rounded-3xl ${authenticated ? 'bg-[#262626]' : 'bg-[#181818]'}`}>
       {/* Background ambient lighting */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-primary/5 rounded-full blur-[140px] pointer-events-none" />
 
@@ -238,7 +238,7 @@ export const GamesSection = ({authenticated}) => {
       <div className="w-full px-2 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-          <p className="text-primary font-extrabold italic uppercase tracking-widest text-xs sm:text-sm mb-2 drop-shadow-sm">
+          <p className="text-primary font-extrabold italic uppercase tracking-widest text-xs sm:text-sm mb-2 drop-shadow-sm mt-4">
             READY FOR THRILLS
           </p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black italic tracking-wide text-white uppercase leading-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
@@ -477,7 +477,7 @@ export const GamesSection = ({authenticated}) => {
             type="button"
             onClick={handleScrollLeft}
             aria-label="Scroll Left"
-            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/80 hover:bg-black text-primary border border-primary/40 hover:border-primary shadow-[0_0_20px_rgba(0,0,0,0.8)] flex items-center justify-center backdrop-blur-md opacity-0 group-hover/slider:opacity-100 transition-all duration-200 cursor-pointer hover:scale-110 not-italic select-none"
+            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/80 hover:bg-black text-primary border border-primary/40 hover:border-primary shadow-[0_0_20px_rgba(0,0,0,0.8)] flex items-center justify-center backdrop-blur-md opacity-0 group-hover/slider:opacity-100 transition-all duration-200 cursor-pointer hover:scale-110 not-italic select-none"
           >
             <ChevronLeft className="w-6 h-6 stroke-[3] not-italic" />
           </button>
@@ -487,7 +487,7 @@ export const GamesSection = ({authenticated}) => {
             type="button"
             onClick={handleScrollRight}
             aria-label="Scroll Right"
-            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/80 hover:bg-black text-primary border border-primary/40 hover:border-primary shadow-[0_0_20px_rgba(0,0,0,0.8)] flex items-center justify-center backdrop-blur-md opacity-0 group-hover/slider:opacity-100 transition-all duration-200 cursor-pointer hover:scale-110 not-italic select-none"
+            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/80 hover:bg-black text-primary border border-primary/40 hover:border-primary shadow-[0_0_20px_rgba(0,0,0,0.8)] flex items-center justify-center backdrop-blur-md opacity-0 group-hover/slider:opacity-100 transition-all duration-200 cursor-pointer hover:scale-110 not-italic select-none"
           >
             <ChevronRight className="w-6 h-6 stroke-[3] not-italic" />
           </button>
@@ -525,22 +525,7 @@ export const GamesSection = ({authenticated}) => {
       <JackpotGamesSection />
 
       {/* Den's Exclusive Popular Games Showcase Section */}
-      <DensExclusiveSection />
-
-      {/* Best Slot Games Showcase Section */}
-      <BestSlotsSection />
-
-      {/* Game Providers Marquee Slider Section */}
-      <GameProvidersSection />
-
-
-      {/* Unleash Your Gaming Experience Feature Section */}
-      <UnleashExperienceSection />
-
-
-      {/* Next Level Releases New Games Section */}
-      <NewGamesSection />
-
+      <DensExclusiveSection authenticated={true} />
 </> :<>
 
 {/* Top Pick Games Slider Section */}
@@ -568,7 +553,7 @@ export const GamesSection = ({authenticated}) => {
       <DensExclusiveSection />
 
       {/* Next Level Releases New Games Section */}
-      <NewGamesSection />
+      <NewGamesSection authenticated={false} />
 </>}
       
     </section>

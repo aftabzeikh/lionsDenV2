@@ -36,7 +36,7 @@ const featuresList = [
   },
 ];
 
-export const UnleashExperienceSection = () => {
+export const UnleashExperienceSection = ({authenticated=false}) => {
   return (
     <section className="relative w-full py-16 sm:py-24 overflow-hidden select-none border-t border-neutral-900/80 bg-black">
       {/* Background Graphic */}
@@ -56,6 +56,7 @@ export const UnleashExperienceSection = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         
         {/* Top Centered Golden Button */}
+        {!authenticated && (
         <div className="mb-6 sm:mb-8">
           <button
             type="button"
@@ -67,6 +68,7 @@ export const UnleashExperienceSection = () => {
             <span>JOIN NOW</span>
           </button>
         </div>
+        )}
 
         {/* Header Titles */}
         <div className="max-w-3xl mx-auto mb-12 sm:mb-16">

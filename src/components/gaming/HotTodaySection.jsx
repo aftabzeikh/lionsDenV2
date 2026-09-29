@@ -117,7 +117,7 @@ export const HotTodaySection = ({ games: propGames }) => {
           type="button"
           onClick={handleScrollLeft}
           aria-label="Scroll Left"
-          className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-amber-400 hover:bg-amber-300 active:scale-95 text-black flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,0.5)] transition-all duration-200 cursor-pointer opacity-90 group-hover/hotslider:opacity-100 hover:scale-110"
+          className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-amber-400 hover:bg-amber-300 active:scale-95 text-black flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,0.5)] transition-all duration-200 cursor-pointer opacity-90 group-hover/hotslider:opacity-100 hover:scale-110"
         >
           <ChevronLeft className="w-5 h-5 stroke-[3]" />
         </button>
@@ -127,7 +127,7 @@ export const HotTodaySection = ({ games: propGames }) => {
           type="button"
           onClick={handleScrollRight}
           aria-label="Scroll Right"
-          className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-amber-400 hover:bg-amber-300 active:scale-95 text-black flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,0.5)] transition-all duration-200 cursor-pointer opacity-90 group-hover/hotslider:opacity-100 hover:scale-110"
+          className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-amber-400 hover:bg-amber-300 active:scale-95 text-black flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,0.5)] transition-all duration-200 cursor-pointer opacity-90 group-hover/hotslider:opacity-100 hover:scale-110"
         >
           <ChevronRight className="w-5 h-5 stroke-[3]" />
         </button>

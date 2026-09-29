@@ -5,7 +5,7 @@ import { selectPopularGames } from '../../redux/slices/gamesSlice';
 import { GameCard } from './GameCard';
 import exclusiveIcon from '../../assets/images/exclusive-icon.svg';
 
-export const DensExclusiveSection = () => {
+export const DensExclusiveSection = ({authenticated}) => {
   const popularGamesFromRedux = useSelector(selectPopularGames);
   const gamesList = popularGamesFromRedux || [];
 
@@ -53,7 +53,7 @@ export const DensExclusiveSection = () => {
 
   return (
     <section
-      className="relative w-full py-8 sm:py-12 bg-black select-none border-t border-neutral-900/80"
+      className={`relative w-full py-8 sm:py-12 ${authenticated ? 'bg-[#262626]' : 'bg-[#181818]'} select-none border-t border-neutral-900/80`}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >

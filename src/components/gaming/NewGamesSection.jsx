@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import { selectAllGames } from '../../redux/slices/gamesSlice';
 
-export const NewGamesSection = () => {
+export const NewGamesSection = ({authenticated=false}) => {
   const allGames = useSelector(selectAllGames);
   const [activeIdx, setActiveIdx] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -79,7 +79,7 @@ export const NewGamesSection = () => {
                   background: 'linear-gradient(95.84deg, #B77E15 4.79%, #F8C45E 51.55%, #B77E15 101.36%)',
                 }}
               >
-                <span>JOIN NOW</span>
+                <span>{authenticated ? 'SHOW ALL' : 'JOIN NOW'}</span>
               </button>
             </div>
 
@@ -91,20 +91,20 @@ export const NewGamesSection = () => {
                 type="button"
                 onClick={handlePrev}
                 aria-label="Previous Game"
-                className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 z-40 w-7 h-7 sm:w-8 sm:h-8 rounded bg-neutral-900/95 hover:bg-neutral-800 text-amber-400 border border-amber-500/50 hover:border-amber-400 flex items-center justify-center shadow-lg transition-all duration-200 cursor-pointer hover:scale-110 active:scale-95"
+                className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 z-20 w-7 h-7 sm:w-8 sm:h-8 rounded bg-neutral-900/95 hover:bg-neutral-800 text-amber-400 border border-amber-500/50 hover:border-amber-400 flex items-center justify-center shadow-lg transition-all duration-200 cursor-pointer hover:scale-110 active:scale-95"
               >
                 <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
               </button>
 
               {/* Left Side Blur / Fade Overlay (on the slide, after the button) */}
-              <div className="absolute left-10 sm:left-12 top-0 bottom-0 w-14 sm:w-18 bg-gradient-to-r from-black via-black/85 to-transparent pointer-events-none z-20 backdrop-blur-[2px]" />
+              <div className="absolute left-10 sm:left-12 top-0 bottom-0 w-14 sm:w-18 bg-gradient-to-r from-black via-black/85 to-transparent pointer-events-none z-10 backdrop-blur-[2px]" />
 
               {/* Right Arrow Button positioned at exact right edge with 0 space */}
               <button
                 type="button"
                 onClick={handleNext}
                 aria-label="Next Game"
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-40 w-7 h-7 sm:w-8 sm:h-8 rounded-l bg-amber-400 hover:bg-amber-300 text-black border-y border-l border-amber-300 flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,0.5)] transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95 font-black"
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-7 h-7 sm:w-8 sm:h-8 rounded-l bg-amber-400 hover:bg-amber-300 text-black border-y border-l border-amber-300 flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,0.5)] transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95 font-black"
               >
                 <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[3]" />
               </button>

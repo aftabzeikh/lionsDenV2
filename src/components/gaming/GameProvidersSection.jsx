@@ -28,7 +28,7 @@ const providersList = [
 
 export const GameProvidersSection = () => {
   return (
-    <div className="w-full mt-14 sm:mt-20 select-none relative">
+    <div className="w-full select-none relative bg-[#181818]">
       {/* Section Header: Dealer/Casino Icon + Game Providers */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
         <div className="flex items-center gap-3">
@@ -36,7 +36,7 @@ export const GameProvidersSection = () => {
           <img src={providerIcon} alt="provider-icon" className="w-8 h-8" />
 
           {/* Title */}
-          <h3 className="text-2xl sm:text-3xl font-black italic tracking-wide text-white uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+          <h3 className="text-2xl sm:text-3xl font-black italic tracking-wide text-white uppercase">
             Game Providers
           </h3>
         </div>
